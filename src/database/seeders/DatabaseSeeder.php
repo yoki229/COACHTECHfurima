@@ -6,13 +6,23 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // 本番でも必要な初期データ
+        $this->call([
+            CategoriesTableSeeder::class,
+            StatusesTableSeeder::class,
+            BrandsTableSeeder::class,
+        ]);
+
+        // 開発用ダミーデータ local環境でのみ実行
+        if (app()->environment('local')) {
+            $this->call([
+                UsersTableSeeder::class,
+                ProductsTableSeeder::class,
+                OrdersTableSeeder::class,
+            ]);
+        }
     }
+
 }
