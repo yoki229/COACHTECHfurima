@@ -80,7 +80,11 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'locale' => 'ja',
+=======
+    'locale' => 'en',
+>>>>>>> 72ed649cee5500fa55949e29f80ebd02f1ca65c4
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +110,11 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'faker_locale' => 'ja_JP',
+=======
+    'faker_locale' => 'en_US',
+>>>>>>> 72ed649cee5500fa55949e29f80ebd02f1ca65c4
 
     /*
     |--------------------------------------------------------------------------
@@ -174,7 +182,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+<<<<<<< HEAD
         App\Providers\FortifyServiceProvider::class,
+=======
+>>>>>>> 72ed649cee5500fa55949e29f80ebd02f1ca65c4
 
     ],
 
