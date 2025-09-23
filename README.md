@@ -27,13 +27,6 @@ Laravel環境構築
 - Laravel 8.6
 - MySQL 8.0.26
 
-
-## テーブル設計
-![テーブル設計](readme-assets/table_1.png)
-![テーブル設計](readme-assets/table_2.png)
-![テーブル設計](readme-assets/table_3.png)
-
-
 ## ER図
 
 ![ER図](readme-assets/table.drawio.png)
