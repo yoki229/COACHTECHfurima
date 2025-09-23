@@ -9,11 +9,10 @@ use App\Models\User;
 class UsersTableSeeder extends Seeder
 {
     public function run()
-    {
-        User::factory(10)->create();
-        
+    {   
         //テストログイン用の一人分のテストダミーデータ
         $testUser = [
+            'id' => 1,
             'name' => '山田太郎',
             'email' => 'yamada@example.com',
             'password' => bcrypt('password'),
@@ -24,5 +23,6 @@ class UsersTableSeeder extends Seeder
         ];
         DB::table('users')->insert($testUser);
 
+        User::factory(10)->create();
     }
 }
