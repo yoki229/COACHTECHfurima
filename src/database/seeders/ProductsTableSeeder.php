@@ -41,7 +41,7 @@ class ProductsTableSeeder extends Seeder
             'description' => '新鮮な玉ねぎ3束のセット',
             'brand_id' => 4,
             'status_id' => 3,
-            'category' => [],
+            'category' => [10],
             ],
             [
             'user_id' => 4,
