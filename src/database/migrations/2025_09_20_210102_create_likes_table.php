@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateLikesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('likes', function (Blueprint $table) {
@@ -23,12 +18,7 @@ class CreateLikesTable extends Migration
             $table->unique(['user_id', 'product_id']);
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('likes');
