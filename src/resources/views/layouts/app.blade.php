@@ -13,7 +13,9 @@
 <body>
   <div class="app">
     <header class="header">
-      <h1 class="header__heading">COACHTECH</h1>
+      <a class="header__logo" href="/">
+        <img src="{{ asset('images/logo.svg') }}" alt="COACHTECH" class="header__img">
+      </a>
       @yield('menu')
     </header>
     <div class="content">

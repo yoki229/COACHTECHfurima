@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 
-class LoginRequest extends FormRequest
+class LoginRequest extends FortifyLoginRequest
 {
     public function authorize()
     {
