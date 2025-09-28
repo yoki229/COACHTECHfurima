@@ -1,17 +1,17 @@
-@extends('layouts/app')
+@extends('layouts.app')
 
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/index.css')}}">
 @endsection
 
-@section('link')
+@section('menu')
 <ul class="header-nav">
 @if (Auth::check())
   <li>
     <form action="/logout" method="post">
       @csrf
-      <button class="">ログアウト</button>
+      <button class="nav__logout">ログアウト</button>
     </form>
   </li>
 @endif

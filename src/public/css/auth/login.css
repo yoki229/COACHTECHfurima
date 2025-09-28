@@ -17,7 +17,7 @@
 }
 
 .login-form__group {
-  margin-top: 32px;
+  margin-top: 25px;
 }
 
 .login-form__group:first-of-type {
@@ -40,7 +40,7 @@
   border-radius: 3px;
 }
 
-.login-form__error-message {
+.error-message {
   color: #ff0000;
 }
 
