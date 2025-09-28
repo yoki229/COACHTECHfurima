@@ -33,7 +33,7 @@ class LoginRequest extends FortifyLoginRequest
     {
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             throw ValidationException::withMessages([
-                'login_error' => ['ログイン情報が登録されていません。'],
+                'login_error' => ['ログイン情報が登録されていません'],
             ]);
         }
     }

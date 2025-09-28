@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Laravel\Fortify\Http\Requests\RegisterRequest as FortifyRegisterRequest;
 
-class RegisterRequest extends FormRequest
+class RegisterRequest extends FortifyRegisterRequest
 {
     public function authorize()
     {
@@ -29,7 +29,7 @@ class RegisterRequest extends FormRequest
             'email.email'           => 'メールアドレスは「@ドメイン」形式で入力してください',
             'password.required'     => 'パスワードを入力してください',
             'password.min'          => 'パスワードは8文字以上で入力してください',
-            'password.confirmed'    => 'パスワードを一致しません',
+            'password.confirmed'    => 'パスワードが一致しません',
         ];
     }
     
