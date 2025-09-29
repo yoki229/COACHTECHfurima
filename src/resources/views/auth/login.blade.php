@@ -29,13 +29,6 @@
         @enderror
       </div>
 
-      {{-- ログインエラー（全体エラー） --}}
-      @error('login_error')
-        <div class="login-form__group">
-          <p class="error-message">{{ $message }}</p>
-        </div>
-      @enderror
-
       <input class="login-form__btn" type="submit" value="ログインする">
     </form>
     <a class="register__link" href="/register">会員登録はこちら</a>
