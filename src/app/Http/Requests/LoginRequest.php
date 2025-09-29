@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Auth;
 
 class LoginRequest extends FortifyLoginRequest
 {
@@ -19,23 +17,5 @@ class LoginRequest extends FortifyLoginRequest
             'email' => 'required|email',
             'password' => 'required',
         ];
-    }
-
-    public function messages()
-    {
-        return [
-            'email.required'        => 'メールアドレスを入力してください',
-            'email.email'           => 'メールアドレスはメール形式で入力してください',
-            'password.required'     => 'パスワードを入力してください',
-        ];
-    }
-
-    public function authenticate()
-    {
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            throw ValidationException::withMessages([
-                'login_error' => ['ログイン情報が登録されていません'],
-            ]);
-        }
     }
 }
