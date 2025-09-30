@@ -13,7 +13,7 @@
 <body>
   <div class="app">
     <header class="header">
-      <a class="header__logo" href="/">
+      <a class="header-nav__logo" href="/">
         <img src="{{ asset('images/logo.svg') }}" alt="COACHTECH" class="header__img">
       </a>
       @yield('menu')
