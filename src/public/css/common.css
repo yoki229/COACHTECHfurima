@@ -15,25 +15,22 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 60px;
+  height: 70px;
   background-color: #000;
 }
 
-.header__img {
-  width: 230px;
-  margin-left: 15px;
+.header-nav__logo{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-/* .header__link {
-  margin: 0 auto;
-  width: 80px;
-  border: 1px solid #D9C6B5;
-  background-color: #F0F0F0;
-  color: #D9C6B5;
-  text-decoration: none;
-
-  grid-column: 3;
-} */
+.header__img {
+  width: 80%;
+  height: 40%;
+  margin-left: 15px;
+}
 
 /* コンテンツ */
 .content {

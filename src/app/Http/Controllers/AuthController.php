@@ -11,4 +11,8 @@ class AuthController extends Controller
       return view('index');
     }
 
+    public function mypageProfile(){
+      return view('mypage_profile');
+    }
+
 }
