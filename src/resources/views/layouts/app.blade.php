@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html class="html" lang="ja">
 
 <head>
   <meta charset="UTF-8">
@@ -10,7 +10,7 @@
   @yield('css')
 </head>
 
-<body>
+<body class="body">
   <div class="app">
     <header class="header">
       <a class="header-nav__logo" href="/">

@@ -4,10 +4,11 @@
 <link rel="stylesheet" href="{{ asset('css/mypage_profile.css')}}">
 @endsection
 
+{{-- ヘッダー --}}
+
 @section('menu')
 @if (Auth::check())
 
-    {{-- 検索ボックス --}}
     <div class="header-nav__search">
         <form action="/search" method="get">
             <input class="search-box" type="search" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
@@ -30,51 +31,113 @@
 @endif
 @endsection
 
+{{-- コンテンツ --}}
+
 @section('content')
 <div class="profile-form">
-  <h2 class="profile-form__heading">プロフィール設定</h2>
-  <div class="profile-form__inner">
-    <form class="profile-form__form" action="/profile" method="post">
-      @csrf
+    <h2 class="profile-form__heading content__heading">プロフィール設定</h2>
+    <div class="profile-form__inner">
+        <form class="profile-form__form" action="/profile" method="post">
+        @csrf
 
-      {{-- ユーザー名 --}}
-      <div class="profile-form__group">
-        <label class="profile-form__label" for="name">ユーザー名</label>
-        <input class="profile-form__input" type="text" name="name" id="name" value="{{ old('name') }}">
-        @error('name')
-          <p class="error-message">{{ $message }}</p>
-        @enderror
-      </div>
+            {{-- プロフィール画像 --}}
+            <div class="profile-form__group">
+                <!-- プレビュー画像（初期は非表示 -->
+                <div class="profile-form__file">
+                    <img src="#" id="preview">
+                    <!-- ファイル選択 -->
+                    <input type="file" name="image" id="image" class="profile-form__file-update" accept="image/*">
+                </div>
+                <div class="error__message">
+                @if ($errors->has('image'))
+                    <ul>
+                    @foreach ($errors->get('image') as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                @endif
+                </div>
+            </div>
 
-      {{-- 郵便番号 --}}
-      <div class="profile-form__group">
-        <label class="profile-form__label" for="postal_code">郵便番号</label>
-        <input class="profile-form__input" type="text" name="postal_code" id="postal_code" pattern="\d{3}-?\d{4}" value="{{ old('postal_code') }}">
-        @error('postal_code')
-          <p class="error-message">{{ $message }}</p>
-        @enderror
-      </div>
+            {{-- ユーザー名 --}}
+            <div class="profile-form__group">
+                <label class="profile-form__label" for="name">ユーザー名</label>
+                <input class="profile-form__input" type="text" name="name" id="name" value="{{ old('name') }}">
+                <div class="error__message">
+                @if ($errors->has('name'))
+                    <ul>
+                    @foreach ($errors->get('name') as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                @endif
+                </div>
+            </div>
 
-      {{-- 住所 --}}
-      <div class="profile-form__group">
-        <label class="profile-form__label" for="address">住所</label>
-        <input class="profile-form__input" type="text" name="address" id="address">
-        @error('address')
-          <p class="error-message">{{ $message }}</p>
-        @enderror
-      </div>
+            {{-- 郵便番号 --}}
+            <div class="profile-form__group">
+                <label class="profile-form__label" for="postal_code">郵便番号</label>
+                <input class="profile-form__input" type="text" name="postal_code" id="postal_code" pattern="\d{3}-?\d{4}" value="{{ old('postal_code') }}">
+                <div class="error__message">
+                @if ($errors->has('postal_code'))
+                    <ul>
+                    @foreach ($errors->get('postal_code') as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                @endif
+                </div>
+        </div>
 
-      {{-- 建物名 --}}
-      <div class="profile-form__group">
-        <label class="profile-form__label" for="building">建物名</label>
-        <input class="profile-form__input" type="text" name="building" id="building">
-        @error('building')
-          <p class="error-message">{{ $message }}</p>
-        @enderror
-      </div>
+            {{-- 住所 --}}
+            <div class="profile-form__group">
+                <label class="profile-form__label" for="address">住所</label>
+                <input class="profile-form__input" type="text" name="address" id="address">
+                <div class="error__message">
+                @if ($errors->has('address'))
+                    <ul>
+                    @foreach ($errors->get('address') as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                @endif
+                </div>
+            </div>
 
-      <input class="profile-form__btn btn" type="submit" value="更新する">
-    </form>
-  </div>
+            {{-- 建物名 --}}
+            <div class="profile-form__group">
+                <label class="profile-form__label" for="building">建物名</label>
+                <input class="profile-form__input" type="text" name="building" id="building">
+                <div class="error__message">
+                @if ($errors->has('building'))
+                    <ul>
+                    @foreach ($errors->get('building') as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                @endif
+                </div>
+            </div>
+
+            <input class="profile-form__btn btn" type="submit" value="更新する">
+        </form>
+    </div>
 </div>
+
+<!-- プレビュー表示用JavaScript -->
+<script>
+document.getElementById('image').addEventListener('change', function(event){
+    const file = event.target.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(e){
+            const preview = document.getElementById('preview');
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+
 @endsection
