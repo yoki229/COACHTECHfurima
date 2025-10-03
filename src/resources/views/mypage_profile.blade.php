@@ -46,7 +46,8 @@
                 <div class="profile-form__file">
                     <img src="{{ asset('storage/test_images/user_default.png') }}" id="preview">
                     <!-- ファイル選択 -->
-                    <input type="file" name="image" id="image" class="profile-form__file-update" accept="image/*">
+                    <input class="profile-form__file-input" type="file" name="image" id="image"  accept="image/*">
+                    <label class="profile-form__file-label" for="image">画像を選択する</label>
                 </div>
                 <div class="error__message">
                 @if ($errors->has('image'))

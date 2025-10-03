@@ -1,15 +1,15 @@
 /* ヘッダー */
 
-.header-nav__search{
-    width: 35%;
+.header-nav__search {
+  width: 35%;
 }
 
-.search-box{
-    background-color: #FFF;
-    border-radius: 3px;
-    width: 100%;
-    height: 43px;
-    padding-left: 20px;
+.search-box {
+  background-color: #FFF;
+  border-radius: 3px;
+  width: 100%;
+  height: 43px;
+  padding-left: 20px;
 }
 
 .search-box::placeholder {
@@ -18,28 +18,29 @@
   padding-left: 30px;
 }
 
-.header-nav__list{
-    width: 30%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.header-nav__list {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.list__logout, .list__mypage{
-    color: #FFF;
-    text-decoration: none;
-    padding: 5px;
-    margin-right: 15px;
-    font-size: 18px;
+.list__logout,
+.list__mypage {
+  color: #FFF;
+  text-decoration: none;
+  padding: 5px;
+  margin-right: 15px;
+  font-size: 18px;
 }
 
-.list__sellpage{
-    background-color: #FFF;
-    color: #000;
-    padding: 8px 20px;
-    margin-right: 15px;
-    text-decoration: none;
-    font-size: 18px;
+.list__sellpage {
+  background-color: #FFF;
+  color: #000;
+  padding: 8px 20px;
+  margin-right: 15px;
+  text-decoration: none;
+  font-size: 18px;
 }
 
 /* プロフィール設定 */
@@ -63,19 +64,44 @@
 }
 
 .profile-form__group {
-  margin-bottom: 32px;
+  margin-bottom: 35px;
 }
 
 .profile-form__group:first-of-type {
   margin-top: 0;
 }
 
+.profile-form__file {
+  display: flex;
+  align-items: center;
+}
+
+.profile-form__file-input {
+  display: none;
+}
+
+.profile-form__file-label {
+  display: inline-block;
+  font-weight: bold;
+  padding: 6px 16px;
+  margin-left: 25px;
+  background-color: #fff;
+  color: #FF5555;
+  border: 2px solid #FF5555;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.profile-form__file-label:hover {
+  opacity: 0.8;
+}
+
 #preview {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }
 
 .profile-form__label {
@@ -90,8 +116,8 @@
   padding: 8px 12px;
   width: 100%;
   height: 40px;
-  border: 1px solid #000;
-  border-radius: 3px;
+  border: 1px solid #5F5F5F;
+  border-radius: 4px;
 }
 
 .error-message {
@@ -113,6 +139,6 @@
   border-radius: 3px;
   background-color: #ff5555;
   color: #FFF;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
 }
