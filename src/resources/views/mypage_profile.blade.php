@@ -42,9 +42,9 @@
 
             {{-- プロフィール画像 --}}
             <div class="profile-form__group">
-                <!-- プレビュー画像（初期は非表示 -->
+                <!-- プレビュー画像 -->
                 <div class="profile-form__file">
-                    <img src="#" id="preview">
+                    <img src="{{ asset('storage/test_images/user_default.png') }}" id="preview">
                     <!-- ファイル選択 -->
                     <input type="file" name="image" id="image" class="profile-form__file-update" accept="image/*">
                 </div>
@@ -133,7 +133,6 @@ document.getElementById('image').addEventListener('change', function(event){
         reader.onload = function(e){
             const preview = document.getElementById('preview');
             preview.src = e.target.result;
-            preview.style.display = 'block';
         }
         reader.readAsDataURL(file);
     }
