@@ -6,7 +6,7 @@
 .app {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
 }
 
 /* ヘッダー */
@@ -20,16 +20,20 @@
 }
 
 .header-nav__logo{
-  width: 30%;
+  width: 26%;
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-.header__img {
+.header-nav__logo-link {
   width: 80%;
-  height: 40%;
+  height: auto;
   margin-left: 15px;
+}
+
+.header__img {
+  object-fit: cover;
 }
 
 /* コンテンツ */
