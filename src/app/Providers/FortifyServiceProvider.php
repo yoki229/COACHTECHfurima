@@ -12,6 +12,7 @@ use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use Laravel\Fortify\Http\Requests\RegisterRequest as FortifyRegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use Laravel\Fortify\Contracts\RegisterResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -37,9 +38,19 @@ class FortifyServiceProvider extends ServiceProvider
 
             return Limit::perMinute(10)->by($email . $request->ip());
         });
-        
 
+        //バリデーションを個別Requestにbind
         $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
         $this->app->bind(FortifyRegisterRequest::class, RegisterRequest::class);
+    
+        //register直後はmypage_profileにリダイレクト
+        $this->app->singleton(RegisterResponse::class, function () {
+            return new class implements RegisterResponse {
+                public function toResponse($request)
+                {
+                    return redirect('/mypage_profile?from=register');
+                }
+            };
+        });
     }
 }
