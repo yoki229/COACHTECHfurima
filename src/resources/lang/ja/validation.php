@@ -30,7 +30,7 @@ return [
         'array'   => ':attributeは、:min個から:max個の間で指定してください。',
     ],
     'boolean'              => ':attributeは、trueかfalseを指定してください。',
-    'confirmed'            => 'パスワードが一致しません',
+    'confirmed'            => 'パスワードと一致しません',
     'current_password'     => 'パスワードが正しくありません',
     'date'                 => ':attributeには有効な日付を指定してください。',
     'date_equals'          => ':attributeには、:dateと同じ日付けを指定してください。',
@@ -57,7 +57,7 @@ return [
         'string'  => ':attributeは、:value文字以上で指定してください。',
         'array'   => ':attributeには、:value個以上のアイテムを指定してください。',
     ],
-    'image'                => ':attributeには画像ファイルを指定してください。',
+    'image'                => '画像はjpeg、ipg、png形式を選択してください',
     'in'                   => '選択された:attributeは正しくありません。',
     'in_array'             => ':attributeには:otherの値を指定してください。',
     'integer'              => ':attributeは整数で指定してください。',
@@ -135,8 +135,12 @@ return [
          'email' => [
             'required' => 'メールアドレスを入力してください',
             'email' => 'メールアドレスは「ユーザー名@ドメイン」形式で入力してください',
+            'image' => [
+                        'required' => 'プロフィール画像を選択してください。',
+                        'image' => 'プロフィール画像はJPEG, PNG形式のみ選択可能です。',
+                    ],
+            ],
         ],
-    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -38,7 +38,7 @@
 <div class="profile-form">
     <h2 class="profile-form__heading content__heading">プロフィール設定</h2>
     <div class="profile-form__inner">
-        <form class="profile-form__form" action="/profile" method="post">
+        <form class="profile-form__form" action="/update_profile" method="post" enctype="multipart/form-data">
         @csrf
 
             {{-- プロフィール画像 --}}
@@ -50,77 +50,48 @@
                     <input class="profile-form__file-input" type="file" name="image" id="image"  accept="image/*">
                     <label class="profile-form__file-label" for="image">画像を選択する</label>
                 </div>
-                <div class="error__message">
-                @if ($errors->has('image'))
-                    <ul>
-                    @foreach ($errors->get('image') as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                    </ul>
-                @endif
-                </div>
+                @error('image')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
             </div>
 
             {{-- ユーザー名 --}}
             <div class="profile-form__group">
                 <label class="profile-form__label" for="name">ユーザー名</label>
                 <input class="profile-form__input" type="text" name="name" id="name" value="{{ old('name') }}">
-                <div class="error__message">
-                @if ($errors->has('name'))
-                    <ul>
-                    @foreach ($errors->get('name') as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                    </ul>
-                @endif
-                </div>
+                    @error('name')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
             </div>
 
             {{-- 郵便番号 --}}
             <div class="profile-form__group">
                 <label class="profile-form__label" for="postal_code">郵便番号</label>
                 <input class="profile-form__input" type="text" name="postal_code" id="postal_code" pattern="\d{3}-?\d{4}" value="{{ old('postal_code') }}">
-                <div class="error__message">
-                @if ($errors->has('postal_code'))
-                    <ul>
-                    @foreach ($errors->get('postal_code') as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                    </ul>
-                @endif
-                </div>
+                    @error('postal_code')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
         </div>
 
             {{-- 住所 --}}
             <div class="profile-form__group">
                 <label class="profile-form__label" for="address">住所</label>
-                <input class="profile-form__input" type="text" name="address" id="address">
-                <div class="error__message">
-                @if ($errors->has('address'))
-                    <ul>
-                    @foreach ($errors->get('address') as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                    </ul>
-                @endif
-                </div>
+                <input class="profile-form__input" type="text" name="address" id="address" value="{{ old('address') }}">
+                    @error('address')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
             </div>
 
             {{-- 建物名 --}}
             <div class="profile-form__group">
                 <label class="profile-form__label" for="building">建物名</label>
-                <input class="profile-form__input" type="text" name="building" id="building">
-                <div class="error__message">
-                @if ($errors->has('building'))
-                    <ul>
-                    @foreach ($errors->get('building') as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                    </ul>
-                @endif
-                </div>
+                <input class="profile-form__input" type="text" name="building" id="building" value="{{ old('building') }}">
+                    @error('building')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
             </div>
 
+            <input type="hidden" name="redirect_to" value="{{ request('from') == 'register' ? '/' : '/mypage' }}">
             <input class="profile-form__btn btn" type="submit" value="更新する">
         </form>
     </div>
