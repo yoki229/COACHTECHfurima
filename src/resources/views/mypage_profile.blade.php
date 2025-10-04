@@ -28,6 +28,7 @@
             <a href="/sell" class="list__sellpage">出品</a>
         </li>
     </ul>
+    
 @endif
 @endsection
 
