@@ -4,15 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Product;
+use App\Models\Item;
 
-class ProductsTableSeeder extends Seeder
+class ItemsTableSeeder extends Seeder
 {
 
     public function run()
     {
         //商品情報のダミーデータ10件
-        $products = [
+        $items = [
             [
             'user_id' => 1,
             'name' => '腕時計',
@@ -116,11 +116,11 @@ class ProductsTableSeeder extends Seeder
         ];
 
         // データを挿入
-        foreach ($products as $product) {
-            $categories = $product['category'];
-            unset($product['category']);
-            $newProduct = Product::create($product);
-            $newProduct->categories()->sync($categories);
+        foreach ($items as $item) {
+            $categories = $item['category'];
+            unset($item['category']);
+            $newItem = Item::create($item);
+            $newItem->categories()->sync($categories);
         }
     }
 }

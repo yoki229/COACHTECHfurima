@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
 
 class ItemController extends Controller
 {
     public function index(){
 
-      $products = Product::only('image','name');
+      $items = Item::select('image', 'name')->get();
 
-      return view('index', compact('products'));
+      return view('index', compact('items'));
     }
 
     public function getItem($id){

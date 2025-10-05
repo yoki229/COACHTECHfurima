@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         if (app()->environment('local')) {
             $this->call([
                 UsersTableSeeder::class,
-                ProductsTableSeeder::class,
+                ItemsTableSeeder::class,
                 OrdersTableSeeder::class,
             ]);
         }
