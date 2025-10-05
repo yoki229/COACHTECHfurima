@@ -1,4 +1,32 @@
-.nav__logout {
-    color: #fff;
-    text-decoration: none;
+.index-contents__item {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90vw;
+}
+
+.item-card {
+    margin: 3px;
+    width: 270px;
+    box-shadow: 4px 4px rgb(224, 224, 224);
+    position: relative;
+}
+
+.item-card__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.item-card__img {
+    width: 270px;
+    height: 160px;
+}
+
+.item-card__content {
+    display: flex;
+    background-color: white;
+    height: 45px;
+    position: relative;
 }

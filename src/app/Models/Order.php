@@ -18,7 +18,7 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'product_id',
+        'item_id',
         'payment_method',
         'postal_code',
         'address',

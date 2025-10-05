@@ -11,11 +11,11 @@ class CreateLikesTable extends Migration
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->unique()->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained('products')->unique()->cascadeOnDelete();
+            $table->foreignId('item_id')->constrained('items')->unique()->cascadeOnDelete();
             $table->timestamps();
 
             // 複合ユニーク制約
-            $table->unique(['user_id', 'product_id']);
+            $table->unique(['user_id', 'item_id']);
         });
     }
     

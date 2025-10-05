@@ -32,9 +32,9 @@ class User extends Authenticatable
     ];
 
     //リレーション
-    public function products()
+    public function items()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Item::class);
     }
 
     public function likes()
