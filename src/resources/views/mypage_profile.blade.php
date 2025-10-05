@@ -4,36 +4,6 @@
 <link rel="stylesheet" href="{{ asset('css/mypage_profile.css')}}">
 @endsection
 
-{{-- ヘッダー --}}
-
-@section('menu')
-@if (Auth::check())
-
-    <div class="header-nav__search">
-        <form action="/search" method="get">
-            <input class="search-box" type="search" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
-        </form>
-    </div>
-    <ul class="header-nav__list">
-        <li>
-            <form action="/logout" method="post">
-            @csrf
-                <button class="list__logout">ログアウト</button>
-            </form>
-        </li>
-        <li>
-            <a href="/mypage" class="list__mypage">マイページ</a>
-        </li>
-        <li>
-            <a href="/sell" class="list__sellpage">出品</a>
-        </li>
-    </ul>
-    
-@endif
-@endsection
-
-{{-- コンテンツ --}}
-
 @section('content')
 <div class="profile-form">
     <h2 class="profile-form__heading content__heading">プロフィール設定</h2>

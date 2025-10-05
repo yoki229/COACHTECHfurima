@@ -4,19 +4,31 @@
 <link rel="stylesheet" href="{{ asset('css/index.css')}}">
 @endsection
 
-@section('menu')
-<ul class="header-nav">
-@if (Auth::check())
-  <li>
-    <form action="/logout" method="post">
-      @csrf
-      <button class="nav__logout">ログアウト</button>
-    </form>
-  </li>
-@endif
-</ul>
-@endsection
-
 @section('content')
+<div class="index-contents">
+    <!-- storeアクションでwith('message',' '商品「を登録しました');をつけるなら↓を追加 -->
+    <!-- @if(session('message'))
+        <p class="message">{{session('message')}}</p>
+        @endif -->
+    {{-- 上部リスト --}}
+    <div class="list-menu">
+        おすすめ
+        マイリスト
+    </div>
 
+    {{-- 商品一覧 --}}
+    <div class="index-contents__item">
+        @foreach ($items as $item)
+        <div class="item-card">
+            <a href="/item/{{$item->id}}" class="item-card__link">
+                <img src="{{ asset($item->image) }}" alt="商品画像" class="item-card__img" />
+                <div class="item-card__content">
+                    <p>{{$item->name}}</p>
+                </div>
+            </a>
+        </div>
+        @endforeach
+    </div>
+
+</div>
 @endsection
