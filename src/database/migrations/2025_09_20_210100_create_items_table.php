@@ -13,7 +13,7 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('name', 255);
-            $table->string('image', 255)->nullable();
+            $table->string('image', 255);
             $table->text('description');
             $table->integer('price');
             $table->foreignId('brand_id')->nullable()->constrained('brands');
