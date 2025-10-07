@@ -13,14 +13,14 @@
 
             {{-- プロフィール画像 --}}
             <div class="profile-form__group">
-                <!-- プレビュー画像 -->
                 <div class="profile-form__file">
-                    <img src="{{ asset('storage/test_images/user_default.png') }}" id="preview">
+                    <!-- プレビュー -->
+                    <img src="{{ asset($user->profile_image ? 'storage/profile_images/' . $user->profile_image : 'storage/test_images/user_default.png') }}" id="preview">
                     <!-- ファイル選択 -->
-                    <input class="profile-form__file-input" type="file" name="image" id="image"  accept="image/*">
+                    <input class="profile-form__file-input" type="file" name="profile_image" id="image"  accept="image/*">
                     <label class="profile-form__file-label" for="image">画像を選択する</label>
                 </div>
-                @error('image')
+                @error('profile_imag')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
             </div>
@@ -28,7 +28,7 @@
             {{-- ユーザー名 --}}
             <div class="profile-form__group">
                 <label class="profile-form__label" for="name">ユーザー名</label>
-                <input class="profile-form__input" type="text" name="name" id="name" value="{{ old('name') }}">
+                <input class="profile-form__input" type="text" name="name" id="name" value="{{ old('name', $user->name) }}">
                     @error('name')
                         <p class="error-message">{{ $message }}</p>
                     @enderror
@@ -37,7 +37,7 @@
             {{-- 郵便番号 --}}
             <div class="profile-form__group">
                 <label class="profile-form__label" for="postal_code">郵便番号</label>
-                <input class="profile-form__input" type="text" name="postal_code" id="postal_code" pattern="\d{3}-?\d{4}" value="{{ old('postal_code') }}">
+                <input class="profile-form__input" type="text" name="postal_code" id="postal_code" pattern="\d{3}-?\d{4}" value="{{ old('postal_code', $user->postal_code) }}">
                     @error('postal_code')
                         <p class="error-message">{{ $message }}</p>
                     @enderror
@@ -46,7 +46,7 @@
             {{-- 住所 --}}
             <div class="profile-form__group">
                 <label class="profile-form__label" for="address">住所</label>
-                <input class="profile-form__input" type="text" name="address" id="address" value="{{ old('address') }}">
+                <input class="profile-form__input" type="text" name="address" id="address" value="{{ old('address', $user->address) }}">
                     @error('address')
                         <p class="error-message">{{ $message }}</p>
                     @enderror
@@ -55,7 +55,7 @@
             {{-- 建物名 --}}
             <div class="profile-form__group">
                 <label class="profile-form__label" for="building">建物名</label>
-                <input class="profile-form__input" type="text" name="building" id="building" value="{{ old('building') }}">
+                <input class="profile-form__input" type="text" name="building" id="building" value="{{ old('building', $user->building) }}">
                     @error('building')
                         <p class="error-message">{{ $message }}</p>
                     @enderror

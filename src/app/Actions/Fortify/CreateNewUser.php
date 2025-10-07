@@ -30,9 +30,6 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-            'profile_image' => 'storage/test_image/user_default.png',// デフォルトを設定
-            'postal_code' => '000-0000', // デフォルトを設定
-            'address'     => '未設定',   // デフォルトを設定
         ]);
     }
 }

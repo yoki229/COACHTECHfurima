@@ -1,94 +1,94 @@
 .profile-form__inner {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 150px;
-  padding-top: 48px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 150px;
+    padding-top: 48px;
 }
 
 .profile-form__form {
-  width: 40vw;
+    width: 40vw;
 }
 
 @media screen and (max-width: 1200px) {
-  .profile-form__form {
-    width: 60vw;
-  }
+    .profile-form__form {
+        width: 60vw;
+    }
 }
 
 .profile-form__group {
-  margin-bottom: 35px;
+    margin-bottom: 35px;
 }
 
 .profile-form__file {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .profile-form__file-input {
-  display: none;
+    display: none;
 }
 
 .profile-form__file-label {
-  display: inline-block;
-  font-weight: bold;
-  padding: 6px 16px;
-  margin-left: 25px;
-  background-color: #fff;
-  color: #FF5555;
-  border: 2px solid #FF5555;
-  border-radius: 10px;
-  cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    padding: 6px 16px;
+    margin-left: 25px;
+    background-color: #fff;
+    color: #FF5555;
+    border: 2px solid #FF5555;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .profile-form__file-label:hover {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 
 #preview {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
 }
 
 .profile-form__label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 8px;
-  font-size: 19px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 19px;
 }
 
 .profile-form__input {
-  display: block;
-  padding: 8px 12px;
-  width: 100%;
-  height: 40px;
-  border: 1px solid #5F5F5F;
-  border-radius: 4px;
+    display: block;
+    padding: 8px 12px;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
 }
 
 .error-message {
-  color: #ff0000;
+    color: #ff0000;
 }
 
 .login__link {
-  display: inline-block;
-  text-decoration: none;
-  margin: 30px;
-}
+    display: inline-block;
+    text-decoration: none;
+    margin: 30px;
+    }
 
 .profile-form__btn {
-  margin: 60px auto 0;
-  display: block;
-  width: 100%;
-  height: 45px;
-  border: none;
-  border-radius: 3px;
-  background-color: #ff5555;
-  color: #FFF;
-  font-size: 20px;
-  cursor: pointer;
+    margin: 60px auto 0;
+    display: block;
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ff5555;
+    color: #FFF;
+    font-size: 20px;
+    cursor: pointer;
 }

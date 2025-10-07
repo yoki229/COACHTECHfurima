@@ -9,19 +9,19 @@ class ItemController extends Controller
 {
     public function index(){
 
-      $items = Item::select('image', 'name')->get();
+        $items = Item::select('image', 'name')->get();
 
-      return view('index', compact('items'));
+        return view('index', compact('items'));
     }
 
     public function getItem($id){
 
-      $item = item::find($id);
+        $item = item::find($id);
 
-      return view('item', compact('item'));
+        return view('item', compact('item'));
     }
 
     public function sell(){
-      return view('sell');
+        return view('sell');
     }
 }
