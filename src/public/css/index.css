@@ -1,14 +1,14 @@
 .index-contents__item {
     display: flex;
+    margin: 0 auto;
     flex-wrap: wrap;
     width: 90vw;
 }
 
 .item-card {
-    margin: 3px;
-    width: 270px;
-    box-shadow: 4px 4px rgb(224, 224, 224);
-    position: relative;
+    width: 300px;
+    height: 350px;
+    margin: 20px;
 }
 
 .item-card__link {
@@ -18,13 +18,10 @@
 }
 
 .item-card__img {
-    width: 270px;
-    height: 160px;
+    width: 100%;
+    height: 270px;
 }
 
 .item-card__content {
-    display: flex;
     background-color: white;
-    height: 45px;
-    position: relative;
 }
