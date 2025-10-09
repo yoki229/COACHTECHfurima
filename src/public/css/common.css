@@ -20,25 +20,33 @@
 }
 
 .header-nav__logo{
-    width: 26%;
+    width: 30%;
     height: 100%;
     display: flex;
     align-items: center;
+    flex: 0 1 300px;
 }
 
 .header-nav__logo-link {
-    width: 80%;
+    width: 100%;
     height: auto;
     margin-left: 15px;
+    display: block;
 }
 
 .header__img {
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .header-nav__search {
     width: 35%;
     height: auto;
+    flex-shrink: 2;
+    min-width: 150px;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
 }
 
 .search-box {
@@ -46,7 +54,6 @@
     border-radius: 3px;
     width: 100%;
     height: 40px;
-    padding-left: 20px;
 }
 
 .search-box::placeholder {
@@ -55,12 +62,25 @@
     padding-left: 30px;
     }
 
+    /* ブラウザを縮めたら見えなくなる */
+@media screen and (max-width: 1000px) {
+    .header-nav__search {
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    min-width: 0;
+    }
+}
+
 .header-nav__list {
     width: 30%;
     height: auto;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    white-space: nowrap;
+    list-style: none;
+    flex-shrink: 0;
 }
 
 .list__logout,
@@ -68,7 +88,7 @@
     color: #FFF;
     text-decoration: none;
     padding: 5px;
-    margin-right: 15px;
+    margin-right: 8px;
     font-size: 18px;
 }
 
