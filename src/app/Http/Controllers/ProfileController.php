@@ -26,10 +26,10 @@ class ProfileController extends Controller
 
         //画像を保存
         if ($request->hasFile('profile_image')) {
-            //古い画像を消去する
-            if($user->profile_image && Storage::disk('public')->exists('profile_images/' .$user->profile_image)){
-                Storage::disk('public')->delete('profile_images/' .$user->profile_image);
-            }
+            //古い画像を消去する(テスト中邪魔なので一時的にコメントアウト)
+            // if($user->profile_image && Storage::disk('public')->exists('profile_images/' .$user->profile_image)){
+            //     Storage::disk('public')->delete('profile_images/' .$user->profile_image);
+            // }
             //新しい画像を元のファイル名のまま保存
             $originalName = $request->file('profile_image')->getClientOriginalName();
             $request->file('profile_image')->storeAs('profile_images', $originalName, 'public');
@@ -39,10 +39,10 @@ class ProfileController extends Controller
 
         //画像以外を保存
         $data = $request->only(['name', 'postal_code', 'address', 'building']);
-        $user->update($data);
+        $user->update($data ?? []);
 
         // リダイレクト先をフォームから取得。なければデフォルト '/'
-        $redirect = $request->input('redirect_to', '/');
+        $redirect = $request->input('redirect_to') ?: '/mypage';
         return redirect($redirect);
     }
 
