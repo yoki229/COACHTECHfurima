@@ -2,3 +2,5 @@
 !.gitignore
 !test_images/
 !test_images/**
+!profile_images/
+!profile_images/**

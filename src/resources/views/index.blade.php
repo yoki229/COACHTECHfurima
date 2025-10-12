@@ -12,8 +12,8 @@
         @endif -->
     {{-- 上部リスト --}}
     <div class="list-menu">
-        おすすめ
-        マイリスト
+        <p class="list-menu__recommend">おすすめ</p>
+        <p class="list-menu__mylist">マイリスト</p>
     </div>
 
     {{-- 商品一覧 --}}
