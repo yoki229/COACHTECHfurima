@@ -21,9 +21,14 @@
         @foreach ($items as $item)
         <div class="item-card">
             <a href="/item/{{ $item->id }}" class="item-card__link">
-                <img src="{{ asset($item->image) }}" alt="商品画像" class="item-card__img" />
+                <div class="item-card__wrapper {{ $item->sold_class }}">
+                    <img src="{{ asset($item->image) }}" alt="商品画像" class="item-card__img" />
+                </div>
                 <div class="item-card__content">
-                    <p>{{$item->name}}</p>
+                    <p class="item-name">{{$item->name}}</p>
+                    @if ($item->buyer_id)
+                        <span class="sold">sold</span>
+                    @endif
                 </div>
             </a>
         </div>

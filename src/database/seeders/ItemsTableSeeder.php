@@ -46,6 +46,7 @@ class ItemsTableSeeder extends Seeder
             [
             'user_id' => 4,
             'name' => '革靴',
+            'buyer_id'=> 3,
             'price' => 4000,
             'image' => 'storage/test_images/Shoes.jpg',
             'description' => 'クラシックなデザインの革靴',
@@ -76,6 +77,7 @@ class ItemsTableSeeder extends Seeder
             [
             'user_id' => 7,
             'name' => 'ショルダーバッグ',
+            'buyer_id' => 5,
             'price' => 3500,
             'image' => 'storage/test_images/bag.jpg',
             'description' => 'おしゃれなショルダーバッグ',
