@@ -8,15 +8,20 @@ use App\Models\Item;
 class ItemController extends Controller
 {
     public function index(){
-
-        $items = Item::select('image', 'name')->get();
+        $items = Item::select('id','image', 'name')->get();
 
         return view('index', compact('items'));
     }
 
-    public function getItem($id){
+    public function mylist(){
+        $user = auth()->user();
+        $items = $user->likes()->with('item')->get()->pluck('item');
 
-        $item = item::find($id);
+        return view('index', compact('items'));
+    }
+
+    public function getItem($item_id){
+        $item = Item::find($item_id);
 
         return view('item', compact('item'));
     }

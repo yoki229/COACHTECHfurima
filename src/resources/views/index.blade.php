@@ -12,15 +12,15 @@
         @endif -->
     {{-- 上部リスト --}}
     <div class="list-menu">
-        <p class="list-menu__recommend">おすすめ</p>
-        <p class="list-menu__mylist">マイリスト</p>
+        <a href="/" class="list-menu__recommend {{ request()->is('/') ? 'active' : '' }}">おすすめ</a>
+        <a href="/mylist" class="list-menu__mylist {{ request()->is('mylist') ? 'active' : '' }}">マイリスト</a>
     </div>
 
     {{-- 商品一覧 --}}
     <div class="index-contents__item">
         @foreach ($items as $item)
         <div class="item-card">
-            <a href="/item/{{$item->id}}" class="item-card__link">
+            <a href="/item/{{ $item->id }}" class="item-card__link">
                 <img src="{{ asset($item->image) }}" alt="商品画像" class="item-card__img" />
                 <div class="item-card__content">
                     <p>{{$item->name}}</p>
