@@ -56,9 +56,28 @@
     height: 270px;
 }
 
+.sold-item .item-card__img {
+    filter: brightness(60%);
+}
+
 .item-card__content {
     background-color: white;
     text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.item-name{
     color: black;
     font-size: 22px;
+}
+
+.sold {
+    background-color: red;
+    color: white;
+    font-size: 22px;
+    padding: 4px 8px;
+    font-weight: bold;
 }
