@@ -11,7 +11,7 @@ class Like extends Model
         'user_id',
         'item_id',
     ];
-    
+
     //リレーション
     public function user()
     {

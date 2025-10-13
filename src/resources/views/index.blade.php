@@ -6,14 +6,20 @@
 
 @section('content')
 <div class="index-contents">
+
     <!-- storeアクションでwith('message',' '商品「を登録しました');をつけるなら↓を追加 -->
     <!-- @if(session('message'))
         <p class="message">{{session('message')}}</p>
         @endif -->
+
     {{-- 上部リスト --}}
     <div class="list-menu">
-        <a href="/" class="list-menu__recommend {{ request()->is('/') ? 'active' : '' }}">おすすめ</a>
-        <a href="/mylist" class="list-menu__mylist {{ request()->is('mylist') ? 'active' : '' }}">マイリスト</a>
+        <a href="/?keyword={{ $keyword }}" class="list-menu__recommend {{ $activeTab === 'recommend' ? 'active' : '' }}">
+            おすすめ
+        </a>
+        <a href="/mylist?keyword={{ $keyword }}" class="list-menu__mylist {{ $activeTab === 'mylist' ? 'active' : '' }}">
+            マイリスト
+        </a>
     </div>
 
     {{-- 商品一覧 --}}

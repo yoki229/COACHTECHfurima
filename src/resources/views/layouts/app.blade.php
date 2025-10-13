@@ -24,6 +24,7 @@
             @if (Auth::check())
                 <div class="header-nav__search">
                     <form action="/search" method="get">
+                        <input type="hidden" name="tab" value="{{ $activeTab ?? '' }}">
                         <input class="search-box" type="search" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
                     </form>
                 </div>

@@ -20,19 +20,31 @@ class Item extends Model
     ];
 
     //テキストボックスの検索
-    public function scopeKeywordSearch($query, $keyword)
+    public function scopeSearch($query, $keyword)
     {
         if (!empty($keyword)) {
 
             // スペースで分割に対応
-            $words = preg_split('/\s+/', $keyword);
+            $words = preg_split('/[\s ]+/u', trim($keyword));
 
             // 部分一致検索
             foreach ($words as $word)
             {
-                $query->where('name', 'like', '%' . $keyword . '%');
+                $query->where('name', 'like', "%{$word}%");
             }
         }
+    }
+
+    //購入済みの判定アクセサ
+    public function getsoldClassAttribute()
+    {
+        return $this->buyer_id ? 'sold-item' : '';
+    }
+
+    //いいねをしているか判定アクセサ
+    public function getLikedAttribute(){
+        $user = auth()->user();
+        return $user ? $user->likes->contains($this->id) : false;
     }
 
     //リレーション
@@ -46,9 +58,9 @@ class Item extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function likes()
+    public function likedUsers()
     {
-        return $this->hasMany(Like::class);
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
 
     public function brand()
