@@ -6,12 +6,13 @@
 
 @section('content')
 
-<form action="/item/{{ $item->id }}/like" method="POST">
+<form class="like-button" action="/item/{{ $item->id }}/like" method="post">
     @csrf
-    <button type="submit" class="like-button {{ $item->liked ? 'liked' : '' }}">
-        ♥
-    </button>
-    <p>{{ $item->liked ? 'いいね済み' : '未いいね' }}</p>
+    @if($item->liked)
+        <button type="submit" class="like-button--liked">★</button>
+    @else
+        <button type="submit" class="like-button--none">☆</button>
+    @endif
 </form>
 
 

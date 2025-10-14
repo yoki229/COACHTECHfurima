@@ -31,7 +31,7 @@ class ItemController extends Controller
         $user = auth()->user();
         $keyword = $request->input('keyword', '');
 
-        $items = Item::whereIn('id', $user->likes->pluck('item_id'))
+        $items = $user->likes()
             ->search($keyword)
             ->get();
 
@@ -77,8 +77,9 @@ class ItemController extends Controller
     }
 
     //いいね機能
-    public function like(Item $item){
+    public function like($item_id){
         $user = auth()->user();
+        $item = Item::findOrFail($item_id);
 
         if($user->likes()->where('item_id', $item->id)->exists())
         {
@@ -87,7 +88,7 @@ class ItemController extends Controller
             $user->likes()->attach($item->id);
         }
 
-        return redirect("item/{$item->id}");
+        return redirect("/item/{$item->id}");
     }
 
     //商品決済画面の表示
