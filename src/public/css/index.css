@@ -26,7 +26,7 @@
 .list-menu__recommend.active,
 .list-menu__mylist.active {
     color: red;
-} 
+}
 
 /* 商品一覧 */
 
@@ -36,6 +36,7 @@
     flex-wrap: wrap;
     width: 95vw;
     margin-bottom: 50px;
+    padding-top: 55px;
 }
 
 .item-card {
