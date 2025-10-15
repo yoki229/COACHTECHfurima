@@ -44,7 +44,7 @@ class ProfileController extends Controller
         $user->update($data ?? []);
 
         // リダイレクト先をフォームから取得。なければデフォルト '/'
-        $redirect = $request->input('redirect_to') ?: '/mypage';
+        $redirect = $request->input('redirect_to') ? : '/mypage';
         return redirect($redirect);
     }
 
