@@ -15,7 +15,7 @@
             <div class="profile-form__group">
                 <div class="profile-form__file">
                     <!-- プレビュー -->
-                    <img src="{{ asset($user->profile_image ? 'storage/profile_images/' . $user->profile_image : 'storage/test_images/user_default.png') }}" id="preview">
+                    <img src="{{ $user->profile_image }}" id="preview">
                     <!-- ファイル選択 -->
                     <input class="profile-form__file-input" type="file" name="profile_image" id="image"  accept="image/*">
                     <label class="profile-form__file-label" for="image">画像を選択する</label>
