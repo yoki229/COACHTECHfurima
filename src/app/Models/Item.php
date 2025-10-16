@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Brand;
 
 class Item extends Model
 {
@@ -39,6 +40,12 @@ class Item extends Model
     public function getsoldClassAttribute()
     {
         return $this->buyer_id ? 'sold-item' : '';
+    }
+
+    //ブランド名表示アクセサ
+    public function getBrandNameAttribute()
+    {
+        return $this->brand_id ? $this->brand->name : '';
     }
 
     //いいねをしているか判定アクセサ
