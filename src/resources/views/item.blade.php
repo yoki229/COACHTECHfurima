@@ -16,13 +16,18 @@
     <div class="container__item">
         {{-- 商品名 --}}
         <div class="item-detail__name">
-            <p class="item-name">{{$item->name}}</p>
+            <p class="item-name">{{ $item->name }}</p>
             @if ($item->buyer_id)
                 <span class="sold">sold</span>
             @endif
         </div>
 
         {{-- ブランド名 --}}
+        <div class="item-detail__brand">
+            @if($item->brand_name)
+                <p class="item-brand">{{ $item->brand_name }}</p>
+            @endif
+        </div>
 
         {{-- 値段 --}}
 

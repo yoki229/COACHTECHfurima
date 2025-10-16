@@ -39,7 +39,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 300,
             'image' => 'storage/test_images/iLoveIMG+d.jpg',
             'description' => '新鮮な玉ねぎ3束のセット',
-            'brand_id' => 4,
+            'brand_id' => 3,
             'status_id' => 3,
             'category' => [10],
             ],
