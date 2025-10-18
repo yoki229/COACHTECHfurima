@@ -71,9 +71,14 @@ class ItemController extends Controller
         $user = auth()->user();
         $item = Item::findOrFail($item_id);
 
+        //いいね
         $item->liked = $user ? $user->likes->contains($item->id) : false;
+        $likeCount = $item->likedUsers()->count();
 
-        return view('item', compact('item'));
+        //コメント
+        $commentCount = $item->comments()->count();
+
+        return view('item', compact('item', 'likeCount', 'commentCount'));
     }
 
     //いいね機能
