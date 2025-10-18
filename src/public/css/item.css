@@ -9,3 +9,12 @@
     color: gray;
 }
 
+.comment-icon {
+  font-size: 24px;      /* アイコンの大きさ */
+  color: gray;          /* アイコンの色 */
+  border-radius: 50%;   /* ここが「丸くする」ポイント！ */
+  padding: 10px;        /* 余白でアイコンを中央に寄せる */
+  display: inline-flex; /* 中央揃え用 */
+  align-items: center;
+}
+

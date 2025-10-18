@@ -2,6 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/item.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 @endsection
 
 @section('content')
@@ -30,6 +31,10 @@
         </div>
 
         {{-- 値段 --}}
+        <div class="item-detail__price">
+            <span class="item-price">{{ $item->price }}</span>
+            <span class="item-price__tax">（税込）</span>
+        </div>
 
         {{-- いいね機能・いいね数 --}}
         <form class="like-button" action="/item/{{ $item->id }}/like" method="post">
@@ -39,9 +44,14 @@
             @else
                 <button type="submit" class="like-button--none">☆</button>
             @endif
+            <p class="like-count">{{ $likeCount }}</p>
         </form>
 
         {{-- コメント数 --}}
+        <p class="comment-count">
+            <i class="fa-regular fa-comment comment-icon"></i>
+            <p class="comment-count">{{ $commentCount }}</p>
+        </p>
 
         {{-- 購入手続きボタン --}}
 
