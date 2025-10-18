@@ -1,20 +1,243 @@
-
-.like-button--liked {
-    font-size: 28px;
-    color: gold;
+.container {
+    margin: 0 auto;
+    padding: 70px 0;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    box-sizing: border-box;
 }
 
-.like-button--none {
-    font-size: 28px;
-    color: gray;
+/* 全体の左右 */
+.container__item {
+    width: 40%;
+    box-sizing: border-box;
 }
 
-.comment-icon {
-    font-size: 24px;      /* アイコンの大きさ */
-    color: gray;          /* アイコンの色 */
-    border-radius: 50%;   /* ここが「丸くする」ポイント！ */
-    padding: 10px;        /* 余白でアイコンを中央に寄せる */
-    display: inline-flex; /* 中央揃え用 */
+/* レスポンシブ対応（縦並び） */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container__item {
+        width: 90%;
+    }
+
+    .item-detail__name {
+        margin-top: 30px;
+    }
+}
+
+/* 左側 */
+/* 画像 */
+.item-image {
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
+.item__img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-top: 25px;
+}
+
+.sold-item .item__img {
+    filter: brightness(60%);
+}
+
+/* 右側 */
+/* 商品名 */
+.item-detail__name {
+    display: flex;
+    align-items: center;
+}
+
+.item-name {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.sold {
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    padding: 4px 8px;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+/* ブランド名 */
+.item-brand {
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+/* 値段 */
+.item-detail__price {
+    margin-top: 10px;
+}
+.item-price{
+    font-size: 23px;
+}
+
+.item-price-number {
+    font-size: 35px;
+}
+
+/* いいね・コメントアイコン */
+.item-detail__count {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+/* いいね機能・いいね数 */
+.like-button__item,
+.comment-count__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.like-button--liked i {
+    font-size: 30px;
+    color: gold;
+}
+
+.like-button--none i {
+    font-size: 30px;
+    color: gray;
+}
+
+/* コメント数 */
+.comment-count__icon {
+    font-size: 28px;
+    color: gray;
+    transform: scaleY(1.2);
+    display: inline-block;
+}
+
+/* 購入手続きボタン */
+.item-detail__sell-page {
+    width: 100%;
+}
+
+.sell-page {
+    width: 100%;
+    margin: 10px 0;
+    padding: 5px 0;
+    border-radius: 5px;
+    background-color: #ff5555;
+    text-align: center;
+}
+
+.sell-page__link {
+    text-decoration: none;
+    color: white;
+    font-size: 23px;
+}
+
+/* 商品説明 */
+.item__title {
+    margin: 30px 0;
+    font-size: 27px;
+}
+
+/* 商品の情報 */
+.item-status__category,
+.item-status__status {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.category__title,
+.status__title {
+    margin-right: 30px;
+    flex-shrink: 0;
+    font-weight: bold;
+    font-size: large;
+}
+
+.category__list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.category__category {
+    background-color: #d9d9d9;
+    padding: 0 15px;
+    border-radius: 20px;
+}
+
+/* コメント欄 */
+.comment-list{
+    margin-bottom: 25px;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-icon {
+    width: 70px;
+}
+
+.comment-username {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.comment-content {
+    width: 100%;
+    white-space: pre-line;  /* コメントの改行を反映しています */
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+
+/* コメントフォーム */
+.item__form-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.comment-form__textarea {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.comment-form__button {
+    width: 100%;
+    margin: 20px 0 0;
+    padding: 5px 0;
+    border-radius: 5px;
+    background-color: #ff5555;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.error-message {
+    color: #ff0000;
+    margin: 8px 0;
+}
+
+.error-message__login {
+    color: #ff0000;
+    text-align: center;
+    margin-top: 8px;
+}

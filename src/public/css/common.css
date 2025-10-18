@@ -203,35 +203,3 @@
     margin-top: 60px;
     font-size: 34px;
 }
-
-/* ページネーション */
-/* .pagination {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-}
-
-.pagination li:not(.active) {
-    border: 1px solid #E0DFDE;
-    padding: 4px 12px;
-    }
-
-.pagination li:not(:last-child) {
-    border-right: none;
-}
-
-.pagination a {
-    color: #8B7969;
-    text-decoration: none;
-}
-
-.pagination__link {
-    text-decoration: none;
-}
-
-.active {
-    padding: 4px 12px;
-    border: 1px solid #8B7969;
-    background-color: #8B7969;
-    color: #FFF;
-} */
