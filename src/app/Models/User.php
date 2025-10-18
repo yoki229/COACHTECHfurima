@@ -35,8 +35,8 @@ class User extends Authenticatable
     public function getProfileImageAttribute()
     {
         //画像が登録されていればそのパス、なければデフォルト画像
-        $profile_image = $this->attributes['profile_image'] 
-        ? 'storage/profile_images/' . $this->attributes['profile_image']  
+        $profile_image = $this->attributes['profile_image']
+        ? 'storage/profile_images/' . $this->attributes['profile_image']
         : 'storage/test_images/user_default.png';
 
         return asset($profile_image);

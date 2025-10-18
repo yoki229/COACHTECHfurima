@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Comment;
+use App\Http\Requests\CommentRequest;
 
 class ItemController extends Controller
 {
@@ -78,7 +80,10 @@ class ItemController extends Controller
         //コメント
         $commentCount = $item->comments()->count();
 
-        return view('item', compact('item', 'likeCount', 'commentCount'));
+        //カテゴリー
+        $categories = $item->categories;
+
+        return view('item', compact('item', 'likeCount', 'commentCount', 'categories'));
     }
 
     //いいね機能
@@ -94,6 +99,22 @@ class ItemController extends Controller
         }
 
         return redirect("/item/{$item->id}");
+    }
+
+    //コメント機能
+    public function commentsStore(CommentRequest $request, $item_id){
+        if(!auth()->check()){
+            // ログインしていなければメッセージを返す
+            return redirect()->back()->with('error', 'ログインしてください');
+        }
+
+        Comment::create([
+            'user_id' => auth()->id(),
+            'item_id' => $item_id,
+            'comment' => $request->comment,
+        ]);
+
+        return redirect()->back();
     }
 
     //商品決済画面の表示
