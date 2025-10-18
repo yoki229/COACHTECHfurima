@@ -17,7 +17,7 @@
     <div class="container__item">
         {{-- 商品名 --}}
         <div class="item-detail__name">
-            <p class="item-name">{{ $item->name }}</p>
+            <h1 class="item-name">{{ $item->name }}</h1>
             @if ($item->buyer_id)
                 <span class="sold">sold</span>
             @endif
@@ -26,32 +26,37 @@
         {{-- ブランド名 --}}
         <div class="item-detail__brand">
             @if($item->brand_name)
-                <p class="item-brand">{{ $item->brand_name }}</p>
+                <p class="item-brand">ブランド：{{ $item->brand_name }}</p>
             @endif
         </div>
 
         {{-- 値段 --}}
         <div class="item-detail__price">
-            <span class="item-price">￥{{ number_format($item->price) }}</span>
-            <span class="item-price__tax">（税込）</span>
+            <span class="item-price">￥</span>
+            <span class="item-price-number">{{ number_format($item->price) }}</span>
+            <span class="item-price">(税込)</span>
         </div>
 
         <div class="item-detail__count">
             {{-- いいね機能・いいね数 --}}
-            <form class="like-button" action="/item/{{ $item->id }}/like" method="post">
+            <form class="like-button__item" action="/item/{{ $item->id }}/like" method="post">
                 @csrf
                 @if($item->liked)
-                    <button type="submit" class="like-button--liked">★</button>
+                    <button type="submit" class="like-button--liked">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
                 @else
-                    <button type="submit" class="like-button--none">☆</button>
+                    <button type="submit" class="like-button--none">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
                 @endif
                 <p class="like-count">{{ $likeCount }}</p>
             </form>
 
             {{-- コメント数 --}}
-            <div class="comment-count">
-                <i class="fa-regular fa-comment comment-icon"></i>
-                <p class="comment-count">{{ $commentCount }}</p>
+            <div class="comment-count__item">
+                <i class="fa-regular fa-comment comment-count__icon"></i>
+                <p class="comment-count__number">{{ $commentCount }}</p>
             </div>
         </div>
 
@@ -64,25 +69,27 @@
 
         {{-- 商品説明 --}}
         <div class="item-detail__description">
-            <h3 class="item-description__title">商品説明</h3>
+            <h2 class="item__title">商品説明</h2>
             <p class="item-description__text">{{ $item->description }}</p>
         </div>
 
         {{-- 商品の情報 --}}
         <div class="item-detail__status">
-            <h3 class="item-status__title">商品の情報</h3>
+            <h2 class="item__title">商品の情報</h2>
 
-            {{--カテゴリー--}}
+            {{-- カテゴリー --}}
             <div class="item-status__category">
                 <p class="category__title">カテゴリー</p>
-                @foreach($categories as $category)
-                    <div class="category__category">
-                        {{ $category->name }}
-                    </div>
-                @endforeach
+                <div class="category__list">
+                    @foreach($categories as $category)
+                        <div class="category__category">
+                            {{ $category->name }}
+                        </div>
+                    @endforeach
+                </div>
             </div>
 
-            {{--商品の状態--}}
+            {{-- 商品の状態 --}}
             <div class="item-status__status">
                 <p class="status__title">商品の状態</p>
                 <p class="status__status">
@@ -93,9 +100,9 @@
 
         {{-- コメント欄 --}}
         <div class="item-detail__comments">
-            <h3 class="item-comments__title">
+            <h2 class="item__title">
                 コメント ({{ $commentCount }})
-            </h3>
+            </h2>
 
             {{--コメント一覧--}}
             <div class="item-comment__list">
@@ -116,30 +123,26 @@
 
             {{--コメントフォーム--}}
             <div class="item-comment__form">
-                <h3 class="item-form__title">
+                <p class="item__form-title">
                     商品へのコメント
-                </h3>
+                </p>
 
                 {{-- コメント入力時のエラーメッセージ --}}
                 @error('comment')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
 
-                {{-- @auth --}}
                     <form action="/item/{{ $item->id }}/comments_store" method="post" class="item-comment__form">
                         @csrf
-                        <textarea name="comment" rows="10" class="comment-form__textarea">{{ old('comment') }}"</textarea>
+                        <textarea name="comment" rows="10" class="comment-form__textarea">{{ old('comment') }}</textarea>
 
                         {{-- ログインしていないユーザーにエラーメッセージ --}}
                         @if(session('error'))
-                            <p class="error-message">{{ session('error') }}</p>
+                            <p class="error-message__login">{{ session('error') }}</p>
                         @endif
 
                         <button class="comment-form__button">コメントを送信する</button>
                     </form>
-                    {{-- @else
-                    <p class="comment-form__login-message"> コメントを投稿するにはログインしてください。</p>
-                @endauth ←もしこれを使うならルーティングのstreをミドルウエアに移動させる--}}
             </div>
         </div>
     </div>
