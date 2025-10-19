@@ -10,7 +10,6 @@ class Order extends Model
     use HasFactory;
 
     //支払方法
-    // あとで消す　Order::PAYMENT_METHODS[$order->payment_method]で日本語表示
     public const PAYMENT_METHODS = [
         'convenience' => 'コンビニ払い',
         'credit_card' => 'カード支払い',
@@ -24,4 +23,10 @@ class Order extends Model
         'address',
         'building',
     ];
+
+    //PAYMENT_METHODSのアクセサ
+    public function getPayAttribute()
+    {
+        return self::PAYMENT_METHODS[$this->payment_method];
+    }
 }

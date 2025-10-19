@@ -1,0 +1,45 @@
+.container {
+    width: 100%;
+}
+
+.container-inner {
+    margin: 0px auto;
+    padding: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item {
+    width: 100%;
+}
+
+.container__left {
+    width: 60%;
+    box-sizing: border-box;
+}
+
+.item-image{
+    width: 150px;
+}
+
+.item__img {
+    width: 100%;
+}
+
+
+.container__right {
+    width: 40%;
+    box-sizing: border-box;
+}
+
+.pay-select {
+    display: inline-block;
+    width: 250px;
+    padding: 2px 4px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    background-color: #fff;
+    appearance: auto;
+}

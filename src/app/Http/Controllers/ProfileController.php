@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Models\User;
+use App\Models\Item;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\AddressRequest;
 
 class ProfileController extends Controller
 {
@@ -46,6 +49,27 @@ class ProfileController extends Controller
         // リダイレクト先をフォームから取得。なければデフォルト '/'
         $redirect = $request->input('redirect_to') ? : '/mypage';
         return redirect($redirect);
+    }
+
+    //住所変更画面
+    public function editAddress($item_id){
+        $user = Auth::user();
+        $item = Item::findOrFail($item_id);
+
+        return view('address', compact('user', 'item'));
+    }
+
+    //住所変更機能
+    public function updateAddress(AddressRequest $request, $item_id){
+        $user = Auth::user();
+
+        $user->update([
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'building' => $request->building,
+        ]);
+
+        return redirect("/purchase/{$item_id}");
     }
 
 }

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Comment;
+use App\Models\Order;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\PurchaseRequest;
 
 class ItemController extends Controller
 {
@@ -103,22 +106,47 @@ class ItemController extends Controller
 
     //コメント機能
     public function commentsStore(CommentRequest $request, $item_id){
-        if(!auth()->check()){
-            // ログインしていなければメッセージを返す
-            return redirect()->back()->with('error', 'ログインしてください');
-        }
-
         Comment::create([
             'user_id' => auth()->id(),
             'item_id' => $item_id,
             'comment' => $request->comment,
         ]);
 
+        if(!auth()->check()){
+            // ログインしていなければメッセージを返す
+            return redirect()->back()->with('error', 'ログインしてください');
+        }
+
         return redirect()->back();
     }
 
-    //商品決済画面の表示
-    public function sell(){
-        return view('sell');
+    //商品購入画面の表示
+    public function purchase($item_id){
+        $user = auth()->user();
+        $item = Item::findOrFail($item_id);
+        $payments = Order::PAYMENT_METHODS;
+
+        return view('purchase', compact('user', 'item', 'payments'));
+    }
+
+    //決済処理
+    public function store(PurchaseRequest $request, $item_id){
+        $user = Auth::user();
+        $item = Item::findOrFail($item_id);
+
+        Order::create([
+            'user_id'           => $user->id,
+            'item_id'           => $item->id,
+            'payment_method'    => $request->payment_method,
+            'postal_code'       => $user->postal_code,
+            'address'           => $user->address,
+            'building'          => $user->building,
+        ]);
+
+        $item->update([
+            'buyer_id' => $user->id,
+        ]);
+
+        return redirect('/')->with('success', '購入が完了しました！');
     }
 }

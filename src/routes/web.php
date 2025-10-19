@@ -12,8 +12,12 @@ Route::post('/item/{item_id}/comments_store', [ItemController::class, 'commentsS
 Route::get('/mypage_profile', [ProfileController::class, 'mypageProfile']);     //プロフィール編集画面
 Route::post('/update_profile', [ProfileController::class, 'updateProfile']);    //プロフィール更新後処理用
 Route::get('/mypage', [ProfileController::class, 'mypage']);                    //プロフィール画面
+Route::get('/purchase/address/{item_id}',[ProfileController::class, 'editAddress']);                           //住所変更画面
+Route::post('/purchase/address/{item_id}', [ProfileController::class, 'updateAddress']);       //住所変更機能
 Route::post('/item/{item_id}/like', [ItemController::class, 'like']);       //いいね機能
 Route::get('/search', [ItemController::class, 'search']);                       //検索処理用
+Route::get('/purchase/{item_id}', [ItemController::class, 'purchase']);                           //商品購入画面
+Route::post('/purchase/{item_id}', [ItemController::class, 'store']);                           //商品購入機能
 Route::get('/sell', [ItemController::class, 'sell']);                           //商品出品画面
 
 
