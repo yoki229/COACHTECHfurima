@@ -1,4 +1,8 @@
 .container {
+    width: 100%;
+}
+
+.container-inner {
     margin: 0 auto;
     padding: 70px 0;
     width: 100%;
@@ -126,23 +130,33 @@
 }
 
 /* 購入手続きボタン */
-.item-detail__sell-page {
+.item-detail__purchase-page {
     width: 100%;
 }
 
-.sell-page {
+.purchase-page {
     width: 100%;
     margin: 10px 0;
-    padding: 5px 0;
-    border-radius: 5px;
-    background-color: #ff5555;
     text-align: center;
+    font-size: 23px;
 }
 
-.sell-page__link {
+.purchase-page--sold {
+    background-color: #d9d9d9;
+    color: rgb(0, 0, 0);
+    padding: 5px 0;
+    border-radius: 5px;
+}
+
+.purchase-page__link {
+    display: block;
+    width: 100%;
+    height: 100%;
     text-decoration: none;
     color: white;
-    font-size: 23px;
+    background-color: #ff5555;
+    padding: 5px 0;
+    border-radius: 5px;
 }
 
 /* 商品説明 */

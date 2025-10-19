@@ -13,7 +13,7 @@ class PurchaseRequest extends FormRequest
 
     public function rules()
     {
-       return [
+        return [
             'payment_id' => 'required',
             'address_id' => 'required',
         ];
