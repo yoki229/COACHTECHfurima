@@ -133,19 +133,19 @@ class ItemController extends Controller
     public function store(PurchaseRequest $request, $item_id){
         $user = Auth::user();
         $item = Item::findOrFail($item_id);
-
-        Order::create([
-            'user_id'           => $user->id,
-            'item_id'           => $item->id,
-            'payment_method'    => $request->payment_method,
-            'postal_code'       => $user->postal_code,
-            'address'           => $user->address,
-            'building'          => $user->building,
+        $orderData = $request->only([
+            'payment_method',
+            'postal_code',
+            'building'
         ]);
+        $orderData['postal_code'] = str_replace('〒', '', $orderData['postal_code']);
 
-        $item->update([
-            'buyer_id' => $user->id,
-        ]);
+        $orderData['user_id'] = $user->id;
+        $orderData['item_id'] = $item->id;
+
+        Order::create($orderData);
+
+        $item->update(['buyer_id' => $user->id,]);
 
         return redirect('/')->with('success', '購入が完了しました！');
     }
