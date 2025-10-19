@@ -136,7 +136,8 @@ class ItemController extends Controller
         $orderData = $request->only([
             'payment_method',
             'postal_code',
-            'building'
+            'building',
+            'address',
         ]);
         $orderData['postal_code'] = str_replace('〒', '', $orderData['postal_code']);
 
