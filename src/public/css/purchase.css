@@ -76,7 +76,20 @@
     color: #fff; 
 }
 
+.address__head{
+    display: flex;
+    justify-content: space-between;
+}
+
+.address-put{
+    text-decoration: none;
+    color: #0c7ace;
+    margin-right: 10px;
+}
+
 .address-list {
+    margin: 20px 0 0 35px;
+    font-weight: bold;
     
 }
 
@@ -87,4 +100,7 @@
 
 .error-message{
     color: red;
+    position: relative;
+    bottom: 30px;
+    left: 43px;
 }

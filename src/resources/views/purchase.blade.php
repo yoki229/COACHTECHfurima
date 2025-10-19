@@ -33,7 +33,7 @@
                 {{-- 支払い方法 --}}
                 <div class="pay">
                     <h3 class="pay-title">支払い方法</h3>
-                    <select name="payment_method" id="payment_id" class="pay-select" required>
+                    <select name="payment_method" id="payment_id" class="pay-select">
                         <option value="" selected hidden>選択してください</option>
                         @foreach($payments as $pay => $label)
                             <option value="{{ $pay }}">{{ $label }}</option>
@@ -49,14 +49,18 @@
 
                 {{-- 配送先 --}}
                 <div class="address">
-                    <h3 class="address-title">配送先</h3>
-                    <div class="address-list">
-                        <input type="text" class="" name="postal_code" value="〒{{ $user->postal_code }}" readonly>
-                        <input type="text" class="" name="address" value="{{ $user->address }}" readonly>
-                        <input type="text" class="" name="building" value="{{ $user->building }}" readonly>
+                    <div class="address__head">
+                        <h3 class="address-title">配送先</h3>
+                        <a href="/purchase/address/{{ $item->id }}" class="address-put">変更する</a>
                     </div>
+                    <div class="address-list">
+                        <p class="address-postal">〒{{ $user->postal_code }}</p>
+                        <p class="address-text">{{ $user->address }}{{ $user->building }}</p>
 
-                    <a href="/purchase/address/{{ $item->id }}">変更する</a>
+                        <input type="hidden" name="postal_code" value="{{ $user->postal_code }}">
+                        <input type="hidden" name="address" value="{{ $user->address }}">
+                        <input type="hidden" name="building" value="{{ $user->building }}">
+                    </div>
                 </div>
                 <hr>
             </div>
