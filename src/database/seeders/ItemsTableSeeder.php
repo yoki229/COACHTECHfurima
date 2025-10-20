@@ -45,6 +45,7 @@ class ItemsTableSeeder extends Seeder
             ],
             [
             'user_id' => 4,
+            'buyer_id' => 1,
             'name' => '革靴',
             'buyer_id'=> 3,
             'price' => 4000,

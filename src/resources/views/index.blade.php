@@ -7,10 +7,9 @@
 @section('content')
 <div class="index-contents">
 
-    <!-- storeアクションでwith('message',' '商品「を登録しました');をつけるなら↓を追加 -->
-    <!-- @if(session('message'))
-        <p class="message">{{session('message')}}</p>
-        @endif -->
+    @if(session('success'))
+        <p class="success">{{session('success')}}</p>
+    @endif
 
     {{-- 上部リスト --}}
     <div class="list-menu">

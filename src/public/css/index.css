@@ -1,4 +1,11 @@
 /* 上部リスト */
+.success {
+    width: 100%;
+    height: 15px;
+    background-color: darkseagreen;
+    color: white;
+}
+
 .list-menu {
     display: flex;
     justify-content: left;
