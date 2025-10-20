@@ -139,7 +139,7 @@ class ItemController extends Controller
             'building',
             'address',
         ]);
-        $orderData['postal_code'] = str_replace('〒', '', $orderData['postal_code']);
+        $orderData['postal_code'] = str_replace(['〒','-'], '', $orderData['postal_code']);
 
         $orderData['user_id'] = $user->id;
         $orderData['item_id'] = $item->id;
