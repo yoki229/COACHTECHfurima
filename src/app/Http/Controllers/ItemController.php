@@ -139,10 +139,12 @@ class ItemController extends Controller
             'building',
             'address',
         ]);
-        $orderData['postal_code'] = str_replace(['〒','-'], '', $orderData['postal_code']);
+        $orderData['postal_code'] = str_replace('〒', '', $orderData['postal_code']);
 
         $orderData['user_id'] = $user->id;
         $orderData['item_id'] = $item->id;
+        // 日本語で支払い方法を保存
+        $orderData['payment_method'] = Order::PAYMENT_METHODS[$orderData['payment_method']];
 
         Order::create($orderData);
 
