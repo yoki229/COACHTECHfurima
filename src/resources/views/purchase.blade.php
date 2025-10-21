@@ -23,7 +23,7 @@
                         <h1 class="item-name">{{ $item->name }}</h1>
 
                         <div class="item-detail__price">
-                            <span class="item-price">￥</span><span class="item-price-number">{{ number_format($item->price) }}</span>
+                            <span class="item-price__symbol">￥</span><span class="item-price__number">{{ number_format($item->price) }}</span>
                         </div>
                     </div>
                 </div>
@@ -68,22 +68,26 @@
             {{-- 右側 --}}
             <div class="container__right">
                 {{-- 決済確認 --}}
-                <table class="sell-table">
-                    <tr>
-                        <th>商品代金</th>
-                        <td>
-                            <span class="item-price">￥</span><span class="item-price-number">{{ number_format($item->price) }}</span>
+                <table class="buy-table">
+                    <tr class="tr">
+                        <td class="td">
+                            <span class="buy-title">商品代金</span>
+                            <div class="right-item__price">
+                                <span class="item-price__symbol">￥</span><span class="item-price__number">{{ number_format($item->price) }}</span>
+                            </div>
                         </td>
                     </tr>
-                    <tr>
-                        <th>支払方法</th>
-                        <td id="payment-preview">未選択</td>
+                    <tr class="tr">
+                        <td class="td">
+                            <span class="buy-title">支払方法</span>
+                            <span class="right-item__paymethod" id="payment-preview">未選択</span>
+                        </td>
                     </tr>
                 </table>
 
                 {{-- 購入ボタン --}}
-                <div class="sell-button">
-                    <button type="submit" class="sell-button__button">購入する</button>
+                <div class="buy-button">
+                    <button type="submit" class="buy-button__button">購入する</button>
                 </div>
             </div>
         </div>

@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategoriesTableSeeder::class,
             StatusesTableSeeder::class,
-            BrandsTableSeeder::class,
         ]);
 
         // 開発用ダミーデータ local環境でのみ実行
@@ -20,6 +19,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 UsersTableSeeder::class,
                 ItemsTableSeeder::class,
+                BrandsTableSeeder::class,
             ]);
         }
     }
