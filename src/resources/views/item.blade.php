@@ -42,14 +42,20 @@
                 {{-- いいね機能・いいね数 --}}
                 <form class="like-button__item" action="/item/{{ $item->id }}/like" method="post">
                     @csrf
-                    @if($item->liked)
-                        <button type="submit" class="like-button--liked">
-                            <i class="fa-solid fa-star"></i>
-                        </button>
+                    @if (Auth::check())
+                        @if($item->liked)
+                            <button type="submit" class="like-button--liked">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                        @else
+                            <button type="submit" class="like-button--none">
+                                <i class="fa-regular fa-star"></i>
+                            </button>
+                        @endif
                     @else
-                        <button type="submit" class="like-button--none">
+                        <p class="like-button--auth" title="ログインするといいねできます">
                             <i class="fa-regular fa-star"></i>
-                        </button>
+                        </p>
                     @endif
                     <p class="like-count">{{ $likeCount }}</p>
                 </form>

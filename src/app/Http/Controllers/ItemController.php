@@ -49,7 +49,7 @@ class ItemController extends Controller
     public function search(Request $request){
         $user = auth()->user();
         $keyword = $request->input('keyword', '');
-        $activeTab = $request->input('tab', 'recommend');
+        $activeTab = $request->input('tab', 'recommend', 'sell', 'buy');
 
         if($activeTab === 'mylist'){
             $items = Item::whereIn('id', $user->likes->pluck('item_id'))
@@ -106,16 +106,16 @@ class ItemController extends Controller
 
     //コメント機能
     public function commentsStore(CommentRequest $request, $item_id){
+        if(!auth()->check()){
+            // ログインしていなければメッセージを返す
+            return redirect()->back()->with('error', 'ログインしてください');
+        }
+
         Comment::create([
             'user_id' => auth()->id(),
             'item_id' => $item_id,
             'comment' => $request->comment,
         ]);
-
-        if(!auth()->check()){
-            // ログインしていなければメッセージを返す
-            return redirect()->back()->with('error', 'ログインしてください');
-        }
 
         return redirect()->back();
     }
@@ -152,4 +152,42 @@ class ItemController extends Controller
 
         return redirect('/')->with('success', '購入が完了しました！');
     }
+
+
+
+
+
+    //マイページの表示（出品一覧）
+    public function mypage(Request $request){
+        $user = auth()->user();
+        $keyword = $request->input('keyword', '');
+
+        $items = Item::select('id', 'image', 'name', 'user_id', 'buyer_id')
+
+            // ユーザーが出品した商品を表示
+            ->when($user, function ($query) use ($user){
+            $query->where('user_id', '==', $user->id);
+            })
+            ->search($keyword)
+            ->get();
+
+        $activeTab = 'sell';
+
+        return view('mypage', compact('user', 'items', 'activeTab', 'keyword'));
+    }
+
+    //マイぺージの表示（購入一覧）
+    public function buy(Request $request){
+        $user = auth()->user();
+        $keyword = $request->input('keyword', '');
+
+        $items = Item::where('buyer_id', $user->id)
+            ->search($keyword)
+            ->get();
+
+        $activeTab = 'buy';
+
+        return view('mypage', compact('user', 'items', 'activeTab', 'keyword'));
+    }
+
 }

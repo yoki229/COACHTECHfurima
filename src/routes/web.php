@@ -19,8 +19,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/mypage_profile', [ProfileController::class, 'mypageProfile']);
     //プロフィール更新処理
     Route::post('/update_profile', [ProfileController::class, 'updateProfile']);
-    //プロフィール画面の表示
-    Route::get('/mypage', [ProfileController::class, 'mypage']);
     //住所変更画面の表示
     Route::get('/purchase/address/{item_id}',[ProfileController::class, 'editAddress']);
     //住所変更処理
@@ -36,5 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/purchase/{item_id}', [ItemController::class, 'store']);
     //出品ページの表示の表示
     Route::get('/sell', [ItemController::class, 'sell']);
+    //マイページ（出品一覧）の表示
+    Route::get('/mypage', [ItemController::class, 'mypage']);
+    //マイページ（購入一覧）の表示
+    Route::get('/buy', [ItemController::class, 'buy']);
 
 });
