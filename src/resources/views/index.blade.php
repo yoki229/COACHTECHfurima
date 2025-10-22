@@ -6,12 +6,12 @@
 
 @section('content')
 <div class="index-contents">
-
+    {{-- 購入後にメッセージ --}}
     @if(session('success'))
         <p class="success">{{session('success')}}</p>
     @endif
 
-    {{-- 上部リスト --}}
+    {{-- リスト切り替え --}}
     <div class="list-menu">
         <a href="/?keyword={{ $keyword }}" class="list-menu__recommend {{ $activeTab === 'recommend' ? 'active' : '' }}">
             おすすめ
@@ -39,6 +39,5 @@
         </div>
         @endforeach
     </div>
-
 </div>
 @endsection

@@ -1,15 +1,5 @@
-.success {
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    font-size: 25px;
-    background-color: rgb(129, 215, 129);
-    color: white;
-    vertical-align: auto;
-}
-
 /* リスト切り替え */
-.list-menu {
+.mypage__menu {
     display: flex;
     justify-content: left;
     width: 100%;
@@ -18,12 +8,12 @@
     border-bottom: 1px solid black;
 }
 
-.list-menu > :first-child {
+.mypage__menu> :first-child {
     margin-left: 10vw;
 }
 
-.list-menu__recommend,
-.list-menu__mylist {
+.list-menu__sell,
+.list-menu__buy {
     font-size: 22px;
     font-weight: bold;
     padding: 20px;
@@ -33,14 +23,14 @@
     color: black;
 }
 
-.list-menu__recommend.active,
-.list-menu__mylist.active {
+.list-menu__sell.active,
+.list-menu__buy.active {
     color: red;
 }
 
 /* 商品一覧 */
 
-.index-contents__item {
+.mypage__item {
     display: flex;
     margin: 0 auto;
     flex-wrap: wrap;
@@ -80,7 +70,7 @@
     padding: 5px;
 }
 
-.item-name{
+.item-name {
     color: black;
     font-size: 22px;
 }

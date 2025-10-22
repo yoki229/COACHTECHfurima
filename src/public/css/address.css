@@ -1,5 +1,6 @@
 .address-content {
-    width: 750px;
+    width: 60vw;
+    max-width: 750px;
     margin: 0 auto;
     padding-bottom: 150px;
     display: flex;
