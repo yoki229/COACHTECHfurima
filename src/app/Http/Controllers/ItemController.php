@@ -49,7 +49,7 @@ class ItemController extends Controller
     public function search(Request $request){
         $user = auth()->user();
         $keyword = $request->input('keyword', '');
-        $activeTab = $request->input('tab', 'recommend', 'sell', 'buy');
+        $activeTab = $request->input('tab', 'recommend');
 
         if($activeTab === 'mylist'){
             $items = Item::whereIn('id', $user->likes->pluck('item_id'))
@@ -160,7 +160,6 @@ class ItemController extends Controller
     //マイページの表示（出品一覧）
     public function mypage(Request $request){
         $user = auth()->user();
-        $keyword = $request->input('keyword', '');
 
         $items = Item::select('id', 'image', 'name', 'user_id', 'buyer_id')
 
@@ -168,26 +167,23 @@ class ItemController extends Controller
             ->when($user, function ($query) use ($user){
             $query->where('user_id', '==', $user->id);
             })
-            ->search($keyword)
             ->get();
 
         $activeTab = 'sell';
 
-        return view('mypage', compact('user', 'items', 'activeTab', 'keyword'));
+        return view('mypage', compact('user', 'items', 'activeTab'));
     }
 
     //マイぺージの表示（購入一覧）
     public function buy(Request $request){
         $user = auth()->user();
-        $keyword = $request->input('keyword', '');
 
         $items = Item::where('buyer_id', $user->id)
-            ->search($keyword)
             ->get();
 
         $activeTab = 'buy';
 
-        return view('mypage', compact('user', 'items', 'activeTab', 'keyword'));
+        return view('mypage', compact('user', 'items', 'activeTab'));
     }
 
 }

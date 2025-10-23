@@ -15,10 +15,10 @@
 
     {{-- リスト切り替え --}}
     <div class="mypage__menu">
-        <a href="/mypage?keyword={{ $keyword }}" class="list-menu__sell {{ $activeTab === 'sell' ? 'active' : '' }}">
+        <a href="/mypage" class="list-menu__sell {{ $activeTab === 'sell' ? 'active' : '' }}">
             出品した商品
         </a>
-        <a href="/buy?keyword={{ $keyword }}" class="list-menu__buy {{ $activeTab === 'buy' ? 'active' : '' }}">
+        <a href="/buy" class="list-menu__buy {{ $activeTab === 'buy' ? 'active' : '' }}">
             購入した商品
         </a>
     </div>
