@@ -153,35 +153,28 @@ class ItemController extends Controller
         return redirect('/')->with('success', '購入が完了しました！');
     }
 
-
-
-
-
-    //マイページの表示（出品一覧）
+    //マイページの表示
     public function mypage(Request $request){
         $user = auth()->user();
 
-        $items = Item::select('id', 'image', 'name', 'user_id', 'buyer_id')
+        //クエリパラメータがbuyかsellを取得
+        $page = $request->query('page');
 
-            // ユーザーが出品した商品を表示
-            ->when($user, function ($query) use ($user){
-            $query->where('user_id', '==', $user->id);
-            })
-            ->get();
+        if ($page === 'sell'){
+            // 購入した商品
+            $items = Item::where('user_id', $user->id)->get();
+            $activeTab = 'sell';
 
-        $activeTab = 'sell';
+        } elseif ($page === 'buy'){
+            // 出品した商品
+            $items = Item::where('buyer_id', $user->id)->get();
 
-        return view('mypage', compact('user', 'items', 'activeTab'));
-    }
-
-    //マイぺージの表示（購入一覧）
-    public function buy(Request $request){
-        $user = auth()->user();
-
-        $items = Item::where('buyer_id', $user->id)
-            ->get();
-
-        $activeTab = 'buy';
+            $activeTab = 'buy';
+        } else {
+            //どちらのタブも選ばれていない状態
+            $items = Collect();
+            $activeTab = '';
+        }
 
         return view('mypage', compact('user', 'items', 'activeTab'));
     }

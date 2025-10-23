@@ -36,7 +36,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/sell', [ItemController::class, 'sell']);
     //マイページ（出品一覧）の表示
     Route::get('/mypage', [ItemController::class, 'mypage']);
-    //マイページ（購入一覧）の表示
-    Route::get('/buy', [ItemController::class, 'buy']);
-
 });
