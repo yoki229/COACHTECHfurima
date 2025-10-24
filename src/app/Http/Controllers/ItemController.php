@@ -158,22 +158,17 @@ class ItemController extends Controller
         $user = auth()->user();
 
         //クエリパラメータがbuyかsellを取得
-        $page = $request->query('page');
+        $page = $request->query('page', 'sell');
 
         if ($page === 'sell'){
-            // 購入した商品
+            // 出品した商品
             $items = Item::where('user_id', $user->id)->get();
             $activeTab = 'sell';
 
-        } elseif ($page === 'buy'){
-            // 出品した商品
-            $items = Item::where('buyer_id', $user->id)->get();
-
-            $activeTab = 'buy';
         } else {
-            //どちらのタブも選ばれていない状態
-            $items = Collect();
-            $activeTab = '';
+            // 購入した商品
+            $items = Item::where('buyer_id', $user->id)->get();
+            $activeTab = 'buy';
         }
 
         return view('mypage', compact('user', 'items', 'activeTab'));

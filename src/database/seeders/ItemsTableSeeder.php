@@ -66,7 +66,7 @@ class ItemsTableSeeder extends Seeder
             'category' => [2],
             ],
             [
-            'user_id' => 6,
+            'user_id' => 1,
             'name' => 'マイク',
             'price' => 8000,
             'image' => 'storage/test_images/Mic.jpg',
@@ -76,7 +76,7 @@ class ItemsTableSeeder extends Seeder
             'category' => [2],
             ],
             [
-            'user_id' => 7,
+            'user_id' => 1,
             'name' => 'ショルダーバッグ',
             'buyer_id' => 5,
             'price' => 3500,
@@ -107,7 +107,7 @@ class ItemsTableSeeder extends Seeder
             'category' => [10],
             ],
             [
-            'user_id' => 10,
+            'user_id' => 1,
             'name' => 'メイクセット',
             'price' => 2000,
             'image' => 'storage/test_images/makeup.jpg',

@@ -8,9 +8,11 @@
 <div class="mypage">
     {{-- ユーザー --}}
     <div class="mypage__user">
-        <img src="{{ $user->profile_image }}">
-        <p class="user-name">{{ $user->name }}</p>
-        <a href="/mypage_profile" class="profile-link">プロフィールを編集</a>
+        <div class="user__profile">
+            <img class="user__img" src="{{ $user->profile_image }}">
+            <p class="user__name">{{ $user->name }}</p>
+        </div>
+        <a href="/mypage_profile" class="user__profile-link">プロフィールを編集</a>
     </div>
 
     {{-- リスト切り替え --}}
@@ -22,6 +24,8 @@
             購入した商品
         </a>
     </div>
+
+    <hr>
 
     {{-- 商品一覧 --}}
     <div class="mypage__item">
