@@ -11,7 +11,7 @@
         <div class="container__item">
             {{-- 商品画像 --}}
             <div class="item-image {{ $item->sold_class }}">
-                <img src="{{ asset($item->image) }}" alt="商品画像" class="item__img" />
+                <img src="{{ asset($item->item_image) }}" alt="商品画像" class="item__img" />
             </div>
         </div>
 

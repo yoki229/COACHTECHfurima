@@ -1,3 +1,13 @@
+.success {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 25px;
+    background-color: rgb(129, 215, 129);
+    color: white;
+    padding-left: 30px;
+}
+
 .mypage {
     width: 100%;
     height: auto;
@@ -72,18 +82,19 @@
 /* 商品一覧 */
 
 .mypage__item {
-    display: flex;
-    margin: 0 auto;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap : 20px;
+    max-width: 1400px;
+    justify-content: center;
     width: 95vw;
-    margin-bottom: 50px;
+    margin: 0 auto 50px;
     padding-top: 55px;
 }
 
 .item-card {
     width: 300px;
     height: 325px;
-    margin: 20px;
 }
 
 .item-card__link {
@@ -122,4 +133,16 @@
     font-size: 22px;
     padding: 4px 8px;
     font-weight: bold;
+}
+
+@media (max-width: 1320px) {
+    .mypage__item {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 950px) {
+    .mypage__item {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

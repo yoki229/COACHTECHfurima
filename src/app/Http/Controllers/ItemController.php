@@ -7,17 +7,20 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Comment;
 use App\Models\Order;
+use App\Models\Category;
+use App\Models\Status;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\SellRequest;
 
 class ItemController extends Controller
 {
-    //商品一覧画面の表示（おすすめ）
+    // 商品一覧画面の表示（おすすめ）
     public function index(Request $request){
         $user = auth()->user();
         $keyword = $request->input('keyword', '');
 
-        $items = Item::select('id', 'image', 'name', 'user_id', 'buyer_id')
+        $items = Item::select('id', 'item_image', 'name', 'user_id', 'buyer_id')
 
             // ユーザーが出品した商品は除外
             ->when($user, function ($query) use ($user){
@@ -31,7 +34,7 @@ class ItemController extends Controller
         return view('index', compact('items', 'activeTab', 'keyword'));
     }
 
-    //商品一覧画面の表示（マイリスト）
+    // 商品一覧画面の表示（マイリスト）
     public function mylist(Request $request){
         $user = auth()->user();
         $keyword = $request->input('keyword', '');
@@ -45,7 +48,7 @@ class ItemController extends Controller
         return view('index', compact('items', 'activeTab', 'keyword'));
     }
 
-    //商品一覧画面の検索機能
+    // 商品一覧画面の検索機能
     public function search(Request $request){
         $user = auth()->user();
         $keyword = $request->input('keyword', '');
@@ -53,12 +56,12 @@ class ItemController extends Controller
 
         if($activeTab === 'mylist'){
             $items = Item::whereIn('id', $user->likes->pluck('item_id'))
-                //キーワード検索(部分一致処理をモデル側で定義)
+                // キーワード検索(部分一致処理をモデル側で定義)
                 ->search($keyword)
                 ->get();
 
         } else {
-            $items = Item::select('id', 'image', 'name', 'user_id', 'buyer_id', )
+            $items = Item::select('id', 'item_image', 'name', 'user_id', 'buyer_id', )
 
             // ユーザーが出品した商品は除外
                 ->when($user, function ($query) use ($user){
@@ -71,25 +74,25 @@ class ItemController extends Controller
         return view('index', compact('items', 'keyword', 'activeTab'));
     }
 
-    //商品詳細画面の表示
+    // 商品詳細画面の表示
     public function getItem($item_id){
         $user = auth()->user();
         $item = Item::findOrFail($item_id);
 
-        //いいね
+        // いいね
         $item->liked = $user ? $user->likes->contains($item->id) : false;
         $likeCount = $item->likedUsers()->count();
 
-        //コメント
+        // コメント
         $commentCount = $item->comments()->count();
 
-        //カテゴリー
+        // カテゴリー
         $categories = $item->categories;
 
         return view('item', compact('item', 'likeCount', 'commentCount', 'categories'));
     }
 
-    //いいね機能
+    // いいね機能
     public function like($item_id){
         $user = auth()->user();
         $item = Item::findOrFail($item_id);
@@ -104,23 +107,23 @@ class ItemController extends Controller
         return redirect("/item/{$item->id}");
     }
 
-    //コメント機能
+    // コメント機能
     public function commentsStore(CommentRequest $request, $item_id){
         if(!auth()->check()){
             // ログインしていなければメッセージを返す
             return redirect()->back()->with('error', 'ログインしてください');
         }
 
-        Comment::create([
-            'user_id' => auth()->id(),
-            'item_id' => $item_id,
-            'comment' => $request->comment,
-        ]);
+        $form = $request->all();
+        $form['user_id'] = auth()->id();
+        $form['item_id'] = $item_id;
+
+        Comment::create($form);
 
         return redirect()->back();
     }
 
-    //商品購入画面の表示
+    // 商品購入画面の表示
     public function purchase($item_id){
         $user = auth()->user();
         $item = Item::findOrFail($item_id);
@@ -129,7 +132,7 @@ class ItemController extends Controller
         return view('purchase', compact('user', 'item', 'payments'));
     }
 
-    //決済処理
+    // 決済処理
     public function store(PurchaseRequest $request, $item_id){
         $user = Auth::user();
         $item = Item::findOrFail($item_id);
@@ -153,11 +156,11 @@ class ItemController extends Controller
         return redirect('/')->with('success', '購入が完了しました！');
     }
 
-    //マイページの表示
+    // マイページの表示
     public function mypage(Request $request){
         $user = auth()->user();
 
-        //クエリパラメータがbuyかsellを取得
+        // クエリパラメータがbuyかsellを取得
         $page = $request->query('page', 'sell');
 
         if ($page === 'sell'){
@@ -172,6 +175,37 @@ class ItemController extends Controller
         }
 
         return view('mypage', compact('user', 'items', 'activeTab'));
+    }
+
+    // 出品画面の表示
+    public function sell(){
+        $categories = Category::all();
+        $statuses = Status::all();
+
+        return view('sell', compact('categories', 'statuses'));
+    }
+
+    // 出品処理
+    public function sellStore(SellRequest $request){
+        $form = $request->except('category');
+        $form['user_id'] = auth()->id();
+
+        // 商品の状態を保存
+        $form['status_id'] = $request->input('status');
+
+        // 画像は名前をつけて保存
+        if ($request->hasFile('item_image')){
+            $originalName = $request->file('item_image')->getClientOriginalName();
+            $request->file('item_image')->storeAs('item_images', $originalName, 'public');
+            $form['item_image'] = $originalName;
+        }
+
+        $item = Item::create($form);
+
+        // 中間テーブルに保存するカテゴリの紐づけ
+        $item->categories()->sync($request->input('category'));
+
+        return redirect('mypage')->with('success', '商品を登録しました！');
     }
 
 }

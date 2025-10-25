@@ -32,8 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase']);
     //商品購入時処理
     Route::post('/purchase/{item_id}', [ItemController::class, 'store']);
-    //出品ページの表示の表示
-    Route::get('/sell', [ItemController::class, 'sell']);
     //マイページ（出品一覧）の表示
     Route::get('/mypage', [ItemController::class, 'mypage']);
+    //出品ページの表示の表示
+    Route::get('/sell', [ItemController::class, 'sell']);
+    //出品ページの表示の表示
+    Route::post('/sell', [ItemController::class, 'sellStore']);
 });
