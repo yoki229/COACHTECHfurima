@@ -15,7 +15,7 @@
                 <div class="item">
                     {{-- 商品画像 --}}
                     <div class="item-image">
-                        <img src="{{ asset($item->image) }}" alt="商品画像" class="item__img" />
+                        <img src="{{ asset($item->item_image) }}" alt="商品画像" class="item__img" />
                     </div>
 
                     {{-- 商品名と値段 --}}

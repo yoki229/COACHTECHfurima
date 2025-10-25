@@ -6,6 +6,11 @@
 
 @section('content')
 <div class="mypage">
+    {{-- 購入後にメッセージ --}}
+    @if(session('success'))
+        <p class="success">{{session('success')}}</p>
+    @endif
+
     {{-- ユーザー --}}
     <div class="mypage__user">
         <div class="user__profile">

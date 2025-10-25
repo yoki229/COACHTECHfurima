@@ -1,0 +1,175 @@
+.sell {
+    width: 50%;
+    min-width: 650px;
+    height: auto;
+    padding-bottom: 100px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.sell-form__group {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.form__title {
+    padding: 40px 0 10px;
+}
+
+.form__item-title {
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 10px;
+}
+
+/* 商品画像 */
+.sell-form__file {
+    width: 100%;
+    height: auto;
+    border: 1px solid #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+    position: relative;
+}
+
+.sell-form__file-input {
+    display: none;
+}
+
+.sell-form__file-label {
+    font-weight: bold;
+    padding: 6px 16px;
+    margin: 0 auto;
+    background-color: #fff;
+    color: #FF5555;
+    border: 3px solid #FF5555;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+.sell-form__file-label:hover {
+    opacity: 0.8;
+}
+
+.file-preview {
+    width: 400px;
+    height: auto;
+    object-fit: cover;
+    display: none;
+    margin-bottom: 20px;
+}
+
+/* カテゴリー */
+.sell-form__category {
+    display: flex;
+    flex-direction: column;
+}
+
+.category__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-label input[type="checkbox"] {
+    display: none;
+}
+
+/* カテゴリー ボタンらしくデザイン */
+.category-label span {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 3px 15px;
+    border: 3px solid #FF5555;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #FF5555;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+/* カテゴリー 選択状態のとき */
+.category-label input[type="checkbox"]:checked+span {
+    background-color: #FF5555;
+    color: white;
+    border-color: #FF5555;
+}
+
+/* 商品の状態 */
+.status-select {
+    display: inline-block;
+    width: 100%;
+    padding: 2px 4px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    background-color: #fff;
+    appearance: auto;
+}
+
+.status-select option {
+    background-color: #666;
+    color: #fff;
+}
+
+/* 商品名と説明の共通部分 */
+.sell-form__name,
+.sell-form__brand,
+.sell-form__description,
+.sell-form__price {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* 商品の説明 */
+.sell-form__description {
+    resize: none;
+}
+
+/* 販売価格 */
+.sell-form__price {
+    position: relative;
+    display: inline-block;
+}
+
+.yen-mark {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.price-input {
+    width: 100%;
+    padding-left: 25px;
+}
+
+/* 出品するボタン */
+.store-button {
+    margin: 60px auto 0;
+    display: block;
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ff5555;
+    color: #FFF;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    padding-top: 10px;
+}

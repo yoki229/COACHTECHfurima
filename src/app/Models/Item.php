@@ -14,12 +14,19 @@ class Item extends Model
         'user_id',
         'buyer_id',
         'name',
-        'image',
+        'item_image',
         'description',
         'price',
-        'brand_id',
+        'brand',
         'status_id'
     ];
+
+
+    //アイテム画像のアクセサ
+    public function getItemImageAttribute()
+    {
+        return asset('storage/item_images/' . $this->attributes['item_image']);
+    }
 
     //テキストボックスの検索
     public function scopeSearch($query, $keyword)
@@ -43,11 +50,6 @@ class Item extends Model
         return $this->buyer_id ? 'sold-item' : '';
     }
 
-    //ブランド名表示アクセサ
-    public function getBrandNameAttribute()
-    {
-        return $this->brand_id ? $this->brand->name : '';
-    }
 
     //いいねをしているか判定アクセサ
     public function getLikedAttribute(){
@@ -69,11 +71,6 @@ class Item extends Model
     public function likedUsers()
     {
         return $this->belongsToMany(User::class, 'likes')->withTimestamps();
-    }
-
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class);
     }
 
     public function status()
