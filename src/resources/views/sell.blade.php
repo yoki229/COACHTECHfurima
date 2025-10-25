@@ -20,7 +20,7 @@
                 <input class="sell-form__file-input" type="file" name="item_image" id="image"  accept="image/*">
                 <label class="sell-form__file-label" for="image">画像を選択する</label>
             </div>
-            @error('image')
+            @error('item_image')
                 <p class="error-message">{{ $message }}</p>
             @enderror
         </div>

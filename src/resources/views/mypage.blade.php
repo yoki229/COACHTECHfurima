@@ -38,7 +38,7 @@
         <div class="item-card">
             <a href="/item/{{ $item->id }}" class="item-card__link">
                 <div class="item-card__wrapper {{ $item->sold_class }}">
-                    <img src="{{ asset($item->image) }}" alt="商品画像" class="item-card__img" />
+                    <img src="{{ asset($item->item_image) }}" alt="商品画像" class="item-card__img" />
                 </div>
                 <div class="item-card__content">
                     <p class="item-name">{{$item->name}}</p>
