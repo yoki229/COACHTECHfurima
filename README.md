@@ -55,6 +55,11 @@ php artisan db:seed
 - Laravel 8.6
 - MySQL 8.0.26
 
+## テーブル仕様
+![ER図](readme-assets/table.1png)
+![ER図](readme-assets/table.2png)
+![ER図](readme-assets/table.3png)
+
 ## ER図
 
 ![ER図](readme-assets/table.drawio.png)
