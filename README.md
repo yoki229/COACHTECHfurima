@@ -1,32 +1,34 @@
-# coachtechフリマ
-
-
+# coachtech フリマ
 
 ## 環境構築
 
-### Dockerビルド
+### Docker ビルド
 
 1. `git clone git@github.com:yoki229/COACHTECHfurima.git`
-2. DockerDesktopアプリを立ち上げる
+2. DockerDesktop アプリを立ち上げる
 3. `cd COACHTECHfurima`
 4. `docker-compose up -d --build`
 
-> MacのM1・M2チップのPCの場合、no matching manifest for linux/arm64/v8 in the manifest list entriesのメッセージが表示されビルドができないことがあります。 エラーが発生する場合は、docker-compose.ymlファイルの「mysql」内に「platform」の項目を追加で記載してください
+> Mac の M1・M2 チップの PC の場合、no matching manifest for linux/arm64/v8 in the manifest list entries のメッセージが表示されビルドができないことがあります。 エラーが発生する場合は、docker-compose.yml ファイルの「mysql」内に「platform」の項目を追加で記載してください
+
 ```
 mysql:
     platform: linux/x86_64(この文追加)
     image: mysql:8.0.26
     environment:
 ```
+
 code .
-### Laravel環境構築
+
+### Laravel 環境構築
 
 1. `docker-compose exec php bash`
 2. `composer install`
 3. `exit`
 4. `cp src/.env.example src/.env`
-   (.env.exampleファイルから.envを作成)
+   (.env.example ファイルから.env を作成)
 5. 環境変数を変更
+
 ```
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -36,7 +38,7 @@ DB_USERNAME=test_user
 DB_PASSWORD=test_pass
 
 MAIL_MAILER=smtp
-MAIL_HOST=mail
+MAIL_HOST=mailhog
 MAIL_PORT=1025
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
@@ -44,16 +46,22 @@ MAIL_ENCRYPTION=null
 MAIL_FROM_ADDRESS=info@example.com
 MAIL_FROM_NAME="${APP_NAME}"
 ```
+
 5. アプリケーションキーの作成
+
 ```
 docker-compose exec php bash
 php artisan key:generate
 ```
+
 6. マイグレーションの実行
+
 ```
 php artisan migrate
 ```
+
 7. シーディングの実行
+
 ```
 php artisan db:seed
 ```
@@ -64,10 +72,9 @@ php artisan db:seed
 - Laravel 8.6
 - MySQL 8.0.26
 
-## ER図
+## ER 図
 
 ![ER図](readme-assets/table.drawio.png)
-
 
 ## URL
 
