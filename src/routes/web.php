@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MailController;
@@ -46,3 +48,18 @@ if (app()->environment('local')){
     //メール送信テスト用ルート
     Route::get('/mail_test',[MailController::class, 'index']);
 }
+
+// メール認証を促すページ
+Route::get('/email', function () {
+    return view('auth.mail');
+})->middleware('auth')->name('verification.notice');
+//メール認証のリンクをクリックしたときの処理
+Route::get('/email/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill(); // 認証完了
+    return redirect('/mypage_profile?from=register'); // 完了後の遷移先
+})->middleware(['auth', 'signed'])->name('verification.verify');
+//メール再送信処理
+Route::post('/email/resend', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', '認証メールを再送信しました。');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send'); //1分間に6回までしかリクエストできない

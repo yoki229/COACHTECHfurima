@@ -18,6 +18,6 @@ class MailController extends Controller
                     ->subject('This is a test mail');
         });
 
-        return 'HTMLメールを送信しました ✨';
+        return 'メールを送信しました';
     }
 }
