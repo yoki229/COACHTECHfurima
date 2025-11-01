@@ -1,18 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MailController;
+
 
 //商品一覧画面（おすすめ画面）の表示
 Route::get('/', [ItemController::class, 'index']);
 //商品詳細画面の表示
 Route::get('/item/{item_id}', [ItemController::class, 'getItem']);
-//コメント投稿機能
-Route::post('/item/{item_id}/comments_store', [ItemController::class, 'commentsStore']);
 
 //ログイン済み用のルーティング
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
     //商品画面一覧（マイリスト画面）の表示
     Route::get('/mylist', [ItemController::class, 'mylist']);
     //プロフィール編集画面の表示
@@ -26,6 +28,8 @@ Route::middleware('auth')->group(function () {
 
     //いいね機能
     Route::post('/item/{item_id}/like', [ItemController::class, 'like']);
+    //コメント投稿機能
+    Route::post('/item/{item_id}/comments_store', [ItemController::class, 'commentsStore']);
     //検索処理
     Route::get('/search', [ItemController::class, 'search']);
     //商品購入画面の表示
@@ -39,3 +43,23 @@ Route::middleware('auth')->group(function () {
     //出品ページの表示の表示
     Route::post('/sell', [ItemController::class, 'sellStore']);
 });
+
+if (app()->environment('local')){
+    //メール送信テスト用ルート
+    Route::get('/mail_test',[MailController::class, 'index']);
+}
+
+// メール認証を促すページ
+Route::get('/email', function () {
+    return view('auth.mail');
+})->middleware('auth')->name('verification.notice');
+//メール認証のリンクをクリックしたときの処理
+Route::get('/email/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill(); // 認証完了
+    return redirect('/mypage_profile?from=register'); // 完了後の遷移先
+})->middleware(['auth', 'signed'])->name('verification.verify');
+//メール再送信処理
+Route::post('/email/resend', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', '認証メールを再送信しました。');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send'); //1分間に6回までしかリクエストできない

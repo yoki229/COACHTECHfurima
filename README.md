@@ -36,6 +36,15 @@ DB_PORT=3306
 DB_DATABASE=test_db
 DB_USERNAME=test_user
 DB_PASSWORD=test_pass
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=info@example.com
+MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 5. アプリケーションキーの作成
