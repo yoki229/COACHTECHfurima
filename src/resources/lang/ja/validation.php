@@ -115,7 +115,7 @@ return [
     'starts_with'          => ':attributeには、:valuesのどれかで始まる値を指定してください。',
     'string'               => ':attributeは文字列を指定してください。',
     'timezone'             => ':attributeには、有効なゾーンを指定してください。',
-    'unique'               => ':attributeの値は既に存在しています。',
+    'unique'               => 'その :attributeは既に使われています。',
     'uploaded'             => ':attributeのアップロードに失敗しました。',
     'url'                  => ':attributeに正しい形式を指定してください。',
     'uuid'                 => ':attributeに有効なUUIDを指定してください。',
@@ -132,7 +132,7 @@ return [
     */
 
     'custom' => [
-         'email' => [
+        'email' => [
             'required' => 'メールアドレスを入力してください',
             'email' => 'メールアドレスは「ユーザー名@ドメイン」形式で入力してください',
             'image' => [
@@ -155,7 +155,7 @@ return [
 
     'attributes' => [
         'name' => 'お名前',
-        'email' => 'メールアドレスは「ユーザー名@ドメイン」形式で入力してください',
-        'password' => 'パスワード'
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
     ],
 ];
