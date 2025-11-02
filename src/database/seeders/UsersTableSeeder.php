@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
             'postal_code' => '123-4567',
             'address' => '群馬県富岡市南後箇1000',
             'building' => 'ユースパーク101',
+            'email_verified_at' => '2025-11-01 19:45:12',
         ];
         DB::table('users')->insert($testUser);
 
