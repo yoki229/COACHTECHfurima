@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\StripeController;
 
 
 //商品一覧画面（おすすめ画面）の表示
@@ -32,16 +33,20 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/item/{item_id}/comments_store', [ItemController::class, 'commentsStore']);
     //検索処理
     Route::get('/search', [ItemController::class, 'search']);
-    //商品購入画面の表示
-    Route::get('/purchase/{item_id}', [ItemController::class, 'purchase']);
-    //商品購入時処理
-    Route::post('/purchase/{item_id}', [ItemController::class, 'store']);
     //マイページ（出品一覧）の表示
     Route::get('/mypage', [ItemController::class, 'mypage']);
     //出品ページの表示の表示
     Route::get('/sell', [ItemController::class, 'sell']);
     //出品ページの表示の表示
     Route::post('/sell', [ItemController::class, 'sellStore']);
+
+    //商品購入画面の表示
+    Route::get('/purchase/{item_id}', [StripeController::class, 'purchase']);
+    //商品購入時処理
+    Route::post('/purchase/{item_id}', [StripeController::class, 'store']);
+    // 成功・キャンセル時（URLベース）
+    Route::get('/purchase/success/{item_id}', [StripeController::class, 'success']);
+    Route::get('/purchase/cancel', [StripeController::class, 'cancel']);
 });
 
 if (app()->environment('local')){
