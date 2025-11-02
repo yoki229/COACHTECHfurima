@@ -12,6 +12,9 @@ use App\Models\Status;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\SellRequest;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
+use Stripe\PaymentIntent;
 
 class ItemController extends Controller
 {
@@ -121,39 +124,6 @@ class ItemController extends Controller
         Comment::create($form);
 
         return redirect()->back();
-    }
-
-    // 商品購入画面の表示
-    public function purchase($item_id){
-        $user = auth()->user();
-        $item = Item::findOrFail($item_id);
-        $payments = Order::PAYMENT_METHODS;
-
-        return view('purchase', compact('user', 'item', 'payments'));
-    }
-
-    // 決済処理
-    public function store(PurchaseRequest $request, $item_id){
-        $user = Auth::user();
-        $item = Item::findOrFail($item_id);
-        $orderData = $request->only([
-            'payment_method',
-            'postal_code',
-            'building',
-            'address',
-        ]);
-        $orderData['postal_code'] = str_replace('〒', '', $orderData['postal_code']);
-
-        $orderData['user_id'] = $user->id;
-        $orderData['item_id'] = $item->id;
-        // 日本語で支払い方法を保存
-        $orderData['payment_method'] = Order::PAYMENT_METHODS[$orderData['payment_method']];
-
-        Order::create($orderData);
-
-        $item->update(['buyer_id' => $user->id,]);
-
-        return redirect('/')->with('success', '購入が完了しました！');
     }
 
     // マイページの表示
