@@ -50,16 +50,10 @@ if (app()->environment('local')){
 }
 
 // メール認証を促すページ
-Route::get('/email', function () {
-    return view('auth.mail');
-})->middleware('auth')->name('verification.notice');
-//メール認証のリンクをクリックしたときの処理
-Route::get('/email/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill(); // 認証完了
-    return redirect('/mypage_profile?from=register'); // 完了後の遷移先
-})->middleware(['auth', 'signed'])->name('verification.verify');
-//メール再送信処理
-Route::post('/email/resend', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return back()->with('message', '認証メールを再送信しました。');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send'); //1分間に6回までしかリクエストできない
+Route::get('/email',[MailController::class, 'email'])->name('verification.notice');
+// メール認証のリンクをクリックしたときの処理
+Route::get('/email/{id}/{hash}',[MailController::class, 'verify'])->middleware(['signed'])->name('verification.verify');
+// 認証はこちらからをクリックしたときの処理
+Route::get('/email/check',[MailController::class, 'emailCheck'])->name('verification.handle');
+// メール再送信処理
+Route::post('/email/resend',[MailController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
