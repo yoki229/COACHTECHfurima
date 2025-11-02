@@ -20,14 +20,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     width: 70%;
     max-width: 800PX;
     margin: 30px auto;
+    gap: 20px;
 }
 
 .user__profile {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
 .user__img {
@@ -39,9 +44,9 @@
 }
 
 .user__name{
-    margin-left: 55px;
     font-weight: bold;
     font-size: 22px;
+    white-space: nowrap;
 }
 
 .user__profile-link{
@@ -50,6 +55,8 @@
     border-radius: 5px;
     padding: 5px 25px;
     text-decoration: none;
+    white-space: nowrap;
+    margin-left: auto;
 }
 
 /* リスト切り替え */
@@ -83,18 +90,17 @@
 
 .mypage__item {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap : 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
     max-width: 1400px;
-    justify-content: center;
     width: 95vw;
     margin: 0 auto 50px;
     padding-top: 55px;
 }
 
 .item-card {
-    width: 300px;
-    height: 325px;
+    width: 100%;
+    height: auto;
 }
 
 .item-card__link {
@@ -106,7 +112,7 @@
 
 .item-card__img {
     width: 100%;
-    height: 270px;
+    height: auto;
 }
 
 .sold-item .item-card__img {
