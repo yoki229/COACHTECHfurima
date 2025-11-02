@@ -11,7 +11,7 @@
         <p>メール認証を完了してください。</p>
     </div>
 
-    <form action="https://mail.google.com" target="_blank">
+    <form method="GET" action="/email/check">
         <button class="send" type="submit">認証はこちらから</button>
     </form>
 
