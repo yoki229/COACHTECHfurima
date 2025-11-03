@@ -44,7 +44,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/purchase/{item_id}', [StripeController::class, 'purchase']);
     //商品購入時処理
     Route::post('/purchase/{item_id}', [StripeController::class, 'store']);
-    // 成功・キャンセル時（URLベース）
+    // 成功・キャンセル時
     Route::get('/purchase/success/{item_id}', [StripeController::class, 'success']);
     Route::get('/purchase/cancel', [StripeController::class, 'cancel']);
 });
