@@ -5,12 +5,12 @@
 @endsection
 
 @section('content')
-<div class="mail">
-    {{-- 未認証時のメッセージ --}}
-    @if(session('message'))
-        <p class="message">{{session('message')}}</p>
-    @endif
+{{-- 未認証時のメッセージ --}}
+@if(session('message'))
+    <p class="message">{{session('message')}}</p>
+@endif
 
+<div class="mail">
     <div class="text">
         <p>登録していただいたメールアドレスに認証メールを送付しました。</p>
         <p>メール認証を完了してください。</p>

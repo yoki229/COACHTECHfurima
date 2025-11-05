@@ -43,7 +43,7 @@ class MailController extends Controller
             return redirect('mypage_profile');
         }
         else {
-            return redirect('/mail')
+            return redirect('/email')
             ->with('message', 'メール認証を完了してください。');
         }
     }
