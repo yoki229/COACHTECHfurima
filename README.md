@@ -24,6 +24,7 @@ code .
 
 1. `docker-compose exec php bash`
 2. `composer install`
+    `composer require stripe/stripe-php`
 3. `exit`
 4. `cp src/.env.example src/.env`
    (.env.example ファイルから.env を作成)
@@ -45,6 +46,13 @@ MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
 MAIL_FROM_ADDRESS=info@example.com
 MAIL_FROM_NAME="${APP_NAME}"
+```
+
+Stripe決済用のAPIキーはhttps://stripe.com/jp（Stripe公式HP）
+のダッシュボードより取得し、.envの一番下に下記の形で記入すること。
+```
+STRIPE_PUBLIC_KEY=pk_test_*****
+STRIPE_SECRET_KEY=sk_test_*****
 ```
 
 5. アプリケーションキーの作成

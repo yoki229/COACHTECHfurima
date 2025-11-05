@@ -49,11 +49,6 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/purchase/cancel', [StripeController::class, 'cancel']);
 });
 
-if (app()->environment('local')){
-    //メール送信テスト用ルート
-    Route::get('/mail_test',[MailController::class, 'index']);
-}
-
 // メール認証を促すページ
 Route::get('/email',[MailController::class, 'email'])->name('verification.notice');
 // メール認証のリンクをクリックしたときの処理
@@ -62,3 +57,8 @@ Route::get('/email/{id}/{hash}',[MailController::class, 'verify'])->middleware([
 Route::get('/email/check',[MailController::class, 'emailCheck'])->name('verification.handle');
 // メール再送信処理
 Route::post('/email/resend',[MailController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+if (app()->environment('local')){
+    //メール送信テスト用ルート
+    Route::get('/mail_test',[MailController::class, 'index']);
+}

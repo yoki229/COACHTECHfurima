@@ -6,10 +6,6 @@
 
 @section('content')
 <div class="index-contents">
-    {{-- 購入後にメッセージ --}}
-    @if(session('success'))
-        <p class="success">{{session('success')}}</p>
-    @endif
 
     {{-- リスト切り替え --}}
     <div class="list-menu">

@@ -29,7 +29,7 @@ class StripeController extends Controller
         $item = Item::findOrFail($item_id);
 
         // Stripe初期化
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(config('services.stripe.secret'));
 
         // 支払い方法（カード or コンビニ）
         $paymentMethod = $request->payment_method;

@@ -31,6 +31,7 @@ class MailController extends Controller
     // メール認証のリンクをクリックしたときの処理
     public function verify(EmailVerificationRequest $request){
         $request->fulfill(); // 認証完了
+        Auth::login($request->user());
         return redirect('mypage_profile?from=register');
     }
 
@@ -42,7 +43,7 @@ class MailController extends Controller
             return redirect('mypage_profile');
         }
         else {
-            return redirect('/register')
+            return redirect('/mail')
             ->with('message', 'メール認証を完了してください。');
         }
     }
