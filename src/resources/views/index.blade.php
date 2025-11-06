@@ -9,10 +9,10 @@
 
     {{-- リスト切り替え --}}
     <div class="list-menu">
-        <a href="/?keyword={{ $keyword }}" class="list-menu__recommend {{ $activeTab === 'recommend' ? 'active' : '' }}">
+        <a href="/?tab=recommend&keyword={{ $keyword }}" class="list-menu__recommend {{ $activeTab === 'recommend' ? 'active' : '' }}">
             おすすめ
         </a>
-        <a href="/mylist?keyword={{ $keyword }}" class="list-menu__mylist {{ $activeTab === 'mylist' ? 'active' : '' }}">
+        <a href="/?tab=mylist&keyword={{ $keyword }}" class="list-menu__mylist {{ $activeTab === 'mylist' ? 'active' : '' }}">
             マイリスト
         </a>
     </div>

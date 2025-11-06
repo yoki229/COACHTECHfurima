@@ -89,6 +89,6 @@ class StripeController extends Controller
     // キャンセル時
     public function cancel()
     {
-        return redirect('/mypage')->with('error', '決済がキャンセルされました。');
+        return redirect('/mypage')->with('success', '決済がキャンセルされました。');
     }
 }

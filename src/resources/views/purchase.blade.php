@@ -61,6 +61,10 @@
                         <input type="hidden" name="address" value="{{ $user->address }}">
                         <input type="hidden" name="building" value="{{ $user->building }}">
                     </div>
+                    {{-- バリデーションエラー表示 --}}
+                    @error('address')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
                 </div>
                 <hr>
             </div>

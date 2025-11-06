@@ -19,6 +19,4 @@ class RegisterRequest extends FortifyRegisterRequest
             'password' => 'required|min:8|confirmed',
         ];
     }
-    
 }
- 

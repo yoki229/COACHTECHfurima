@@ -8,21 +8,6 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class MailController extends Controller
 {
-    // メール送信テスト用ルート
-    public function index()
-    {
-        // Bladeの内容をHTMLに変換
-        $html = view('emails.test')->render();
-
-        // HTMLメールとして送信
-        Mail::html($html, function ($message) {
-            $message->to('abc@example.com', 'test')
-                    ->subject('This is a test mail');
-        });
-
-        return 'メールを送信しました';
-    }
-
     // メール認証を促すページ
     public function email(){
         return view('auth.mail');

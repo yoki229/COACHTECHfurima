@@ -11,19 +11,27 @@ use App\Models\Category;
 use App\Models\Status;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PurchaseRequest;
-use App\Http\Requests\SellRequest;
+use App\Http\Requests\ExhibitionRequest;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use Stripe\PaymentIntent;
 
 class ItemController extends Controller
 {
-    // 商品一覧画面の表示（おすすめ）
+    // 商品一覧画面の表示
     public function index(Request $request){
         $user = auth()->user();
         $keyword = $request->input('keyword', '');
+        $tab = $request->input('tab', 'recommend');
 
-        $items = Item::select('id', 'item_image', 'name', 'user_id', 'buyer_id')
+        if($tab === 'mylist' && $user) {
+            //マイリスト表示
+            $items = $user->likes()
+            ->search($keyword)
+            ->get();
+        } else {
+            //おすすめ表示
+            $items = Item::select('id', 'item_image', 'name', 'user_id', 'buyer_id')
 
             // ユーザーが出品した商品は除外
             ->when($user, function ($query) use ($user){
@@ -31,22 +39,9 @@ class ItemController extends Controller
             })
             ->search($keyword)
             ->get();
+        }
 
-        $activeTab = 'recommend';
-
-        return view('index', compact('items', 'activeTab', 'keyword'));
-    }
-
-    // 商品一覧画面の表示（マイリスト）
-    public function mylist(Request $request){
-        $user = auth()->user();
-        $keyword = $request->input('keyword', '');
-
-        $items = $user->likes()
-            ->search($keyword)
-            ->get();
-
-        $activeTab = 'mylist';
+        $activeTab = '$tab';
 
         return view('index', compact('items', 'activeTab', 'keyword'));
     }
@@ -126,27 +121,6 @@ class ItemController extends Controller
         return redirect()->back();
     }
 
-    // マイページの表示
-    public function mypage(Request $request){
-        $user = auth()->user();
-
-        // クエリパラメータがbuyかsellを取得
-        $page = $request->query('page', 'sell');
-
-        if ($page === 'sell'){
-            // 出品した商品
-            $items = Item::where('user_id', $user->id)->get();
-            $activeTab = 'sell';
-
-        } else {
-            // 購入した商品
-            $items = Item::where('buyer_id', $user->id)->get();
-            $activeTab = 'buy';
-        }
-
-        return view('mypage', compact('user', 'items', 'activeTab'));
-    }
-
     // 出品画面の表示
     public function sell(){
         $categories = Category::all();
@@ -156,7 +130,7 @@ class ItemController extends Controller
     }
 
     // 出品処理
-    public function sellStore(SellRequest $request){
+    public function sellStore(ExhibitionRequest $request){
         $form = $request->except('category');
         $form['user_id'] = auth()->id();
 
