@@ -11,12 +11,6 @@
     width: 40vw;
 }
 
-@media screen and (max-width: 1200px) {
-    .profile-form__form {
-        width: 60vw;
-    }
-}
-
 .profile-form__group {
     margin-bottom: 35px;
 }
@@ -40,6 +34,7 @@
     border: 2px solid #FF5555;
     border-radius: 10px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .profile-form__file-label:hover {
@@ -91,4 +86,14 @@
     color: #FFF;
     font-size: 20px;
     cursor: pointer;
+    white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+    .profile-form__form {
+        width: 60vw;
+    }
+    .profile-form__file-label {
+        margin-left: auto;
+    }
 }

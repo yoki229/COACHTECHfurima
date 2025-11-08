@@ -73,8 +73,7 @@
 }
 
 .list__logout,
-.list__mypage,
-.list__login {
+.list__mypage {
     color: #FFF;
     text-decoration: none;
     padding: 5px;
@@ -93,7 +92,7 @@
 }
 
 /* 横幅1000px以下は検索ボックスを２段目に表示 */
-@media screen and (max-width: 1100px) {
+@media (max-width: 1100px) {
     .header {
         display: flex;
         justify-content: space-between;
@@ -115,7 +114,7 @@
 }
 
 /* 横幅750px以下はロゴとリストを縮小表示*/
-@media screen and (max-width: 750px) {
+@media (max-width: 750px) {
     .header__img {
         width: 250px;
     }
@@ -125,8 +124,7 @@
     }
 
     .list__logout,
-    .list__mypage,
-    .list__login {
+    .list__mypage {
         padding: 5px;
         margin-right: 5px;
     }
@@ -138,14 +136,14 @@
 }
 
 /* 横幅600px以下はロゴを縮小表示*/
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
     .header__img {
         width: 200px;
     }
 }
 
 /* 横幅550px以下はロゴ、検索、リストを縮小表示*/
-@media screen and (max-width: 550px) {
+@media (max-width: 550px) {
     .header {
         padding: 10px;
     }
@@ -164,8 +162,7 @@
     }
 
     .list__logout,
-    .list__mypage,
-    .list__login {
+    .list__mypage {
         padding: 5px;
         margin-right: 3px;
         font-size: 11px;
@@ -178,8 +175,8 @@
     }
 }
 
-/* 横幅350px以下はロゴを非表示*/
-@media screen and (max-width: 350px) {
+/* 横幅380px以下はロゴを縮小表示*/
+@media (max-width: 380px) {
     .header__img {
         width: 100px;
     }

@@ -20,7 +20,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     width: 70%;
     max-width: 800PX;
     margin: 30px auto;
@@ -30,7 +29,6 @@
 .user__profile {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
@@ -90,12 +88,12 @@
 
 .mypage__item {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     max-width: 1400px;
     width: 95vw;
-    margin: 0 auto 50px;
-    padding-top: 55px;
+    padding: 55px 50px;
+    box-sizing: border-box;
 }
 
 .item-card {
@@ -150,5 +148,24 @@
 @media (max-width: 950px) {
     .mypage__item {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 680px) {
+    .mypage__user {
+        flex-direction: column;
+        gap: unset;
+    }
+
+    .user__profile {
+        margin-right: auto;
+    }
+
+    .user__profile-link {
+        font-size: 10px;
+    }
+
+    .mypage__item {
+        grid-template-columns: repeat(1, 1fr);
     }
 }

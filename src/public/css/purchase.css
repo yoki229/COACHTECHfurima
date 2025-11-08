@@ -49,8 +49,9 @@
 /* 支払方法・住所 */
 .pay,
 .address {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 150px;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -61,7 +62,7 @@
 }
 
 .pay-select {
-    display: inline-block;
+    display: block;
     width: 250px;
     padding: 2px 4px;
     font-size: 16px;
@@ -69,12 +70,12 @@
     border-radius: 4px;
     background-color: #fff;
     appearance: auto;
-    margin: 35px;
+    margin: 50px 35px;
 }
 
 .pay-select option {
     background-color: #636769;
-    color: #fff; 
+    color: #fff;
 }
 
 .address__head{
@@ -89,8 +90,8 @@
 }
 
 .address-list {
-    margin: 20px 0 0 35px;
     font-weight: bold;
+    margin: 35px 50px;
 }
 
 /* 右側 */
@@ -144,8 +145,8 @@
 .error-message{
     color: red;
     position: relative;
-    bottom: 30px;
-    left: 43px;
+    margin-left: 35px;
+    bottom: 35px;
 }
 
 /* 横幅1060px以下の設定*/
@@ -153,5 +154,48 @@
     .td {
         display: flex;
         flex-direction: column;
+    }
+}
+
+/* 横幅775px以下の設定*/
+@media (max-width: 775px) {
+    .container-inner {
+        flex-direction: column;
+        align-items: center;
+        margin: 70px 30px;
+    }
+
+    .container__left,
+    .container__right {
+        width: 100%;
+    }
+
+    .container__right {
+        margin-top: 30px;
+    }
+
+    .item {
+        justify-content: center;
+    }
+
+    .item-name {
+        font-size: 17px;
+    }
+
+    .pay {
+        height: auto;
+    }
+
+    .pay-select {
+        width: 85%;
+        max-width: 250px;
+        margin: 35px auto;
+    }
+
+    .error-message {
+        color: red;
+        position: relative;
+        margin: 0 auto;
+        bottom: 30px;
     }
 }

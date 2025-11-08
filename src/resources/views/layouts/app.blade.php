@@ -15,42 +15,40 @@
 
         <!-- ヘッダー -->
         <header class="header">
+            @if (Auth::check())
             <div class="header-nav__logo">
                 <a class="header-nav__logo-link" href="/">
                     <img src="{{ asset('images/logo.svg') }}" alt="COACHTECH" class="header__img">
                 </a>
             </div>
 
-            @if (Auth::check())
-                <div class="header-nav__search">
-                    <form action="/search" method="get">
-                        <input type="hidden" name="tab" value="{{ $activeTab ?? '' }}">
-                        <input class="search-box" type="search" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
+            <div class="header-nav__search">
+                <form action="/search" method="get">
+                    <input type="hidden" name="tab" value="{{ $activeTab ?? '' }}">
+                    <input class="search-box" type="search" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
+                </form>
+            </div>
+            <ul class="header-nav__list">
+                <li>
+                    <form action="/logout" method="post">
+                    @csrf
+                        <button class="list__logout">ログアウト</button>
                     </form>
-                </div>
-                <ul class="header-nav__list">
-                    <li>
-                        <form action="/logout" method="post">
-                        @csrf
-                            <button class="list__logout">ログアウト</button>
-                        </form>
-                    </li>
-                    <li>
-                        <a href="/mypage" class="list__mypage">マイページ</a>
-                    </li>
-                    <li>
-                        <a href="/sell" class="list__sellpage">出品</a>
-                    </li>
-                </ul>
-            
+                </li>
+                <li>
+                    <a href="/mypage" class="list__mypage">マイページ</a>
+                </li>
+                <li>
+                    <a href="/sell" class="list__sellpage">出品</a>
+                </li>
+            </ul>
+
             @else
-                <ul class="header-nav__list">
-                    @if (request()->path() !== 'login')
-                        <li>
-                            <a href="/login" class="list__login">ログインする</a>
-                        </li>
-                    @endif
-                </ul>
+            <div class="header-nav__logo">
+                <a class="header-nav__logo-link" href="/login">
+                    <img src="{{ asset('images/logo.svg') }}" alt="COACHTECH" class="header__img">
+                </a>
+            </div>
             @endif
 
         </header>
