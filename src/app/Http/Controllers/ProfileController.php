@@ -32,7 +32,7 @@ class ProfileController extends Controller
 
         return view('mypage', compact('user', 'items', 'activeTab'));
     }
-    
+
     // プロフィール更新ページの表示
     public function mypageProfile(){
         $user = auth()->user();

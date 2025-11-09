@@ -44,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
         //画像が登録されていればそのパス、なければデフォルト画像
         $profile_image = $this->attributes['profile_image']
         ? 'storage/profile_images/' . $this->attributes['profile_image']
-        : 'storage/test_images/user_default.png';
+        : 'storage/profile_images/user_default.png';
 
         return asset($profile_image);
     }

@@ -42,7 +42,7 @@ class FortifyServiceProvider extends ServiceProvider
         //バリデーションを個別Requestにbind
         $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
         $this->app->bind(FortifyRegisterRequest::class, RegisterRequest::class);
-    
+
         //register直後はmypage_profileにリダイレクト
         $this->app->singleton(RegisterResponse::class, function () {
             return new class implements RegisterResponse {
