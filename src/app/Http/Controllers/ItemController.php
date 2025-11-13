@@ -126,7 +126,9 @@ class ItemController extends Controller
 
         // 画像は名前をつけて保存
         if ($request->hasFile('item_image')){
-            $form['item_image'] = $request->file('item_image')->store('item_images', 'public');
+            $originalName = $request->file('item_image')->getClientOriginalName();
+            $request->file('item_image')->storeAs('item_images', $originalName, 'public');
+            $form['item_image'] = $originalName;
         }
 
         $item = Item::create($form);
