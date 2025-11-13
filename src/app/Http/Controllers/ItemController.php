@@ -6,15 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Comment;
-use App\Models\Order;
 use App\Models\Category;
 use App\Models\Status;
 use App\Http\Requests\CommentRequest;
-use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\ExhibitionRequest;
-use Stripe\Stripe;
-use Stripe\Checkout\Session;
-use Stripe\PaymentIntent;
 
 class ItemController extends Controller
 {
@@ -53,11 +48,8 @@ class ItemController extends Controller
         $activeTab = $request->input('tab', 'recommend');
 
         if($activeTab === 'mylist'){
-            $items = Item::whereIn('id', $user->likes->pluck('item_id'))
-                // キーワード検索(部分一致処理をモデル側で定義)
-                ->search($keyword)
-                ->get();
-
+            // キーワード検索(部分一致処理をモデル側で定義)
+            $items = $user->likes()->search($keyword)->get();
         } else {
             $items = Item::select('id', 'item_image', 'name', 'user_id', 'buyer_id', )
 
@@ -95,12 +87,7 @@ class ItemController extends Controller
         $user = auth()->user();
         $item = Item::findOrFail($item_id);
 
-        if($user->likes()->where('item_id', $item->id)->exists())
-        {
-            $user->likes()->detach($item->id);
-        } else {
-            $user->likes()->attach($item->id);
-        }
+        $user->likes()->toggle($item->id);
 
         return redirect("/item/{$item->id}");
     }
@@ -112,7 +99,7 @@ class ItemController extends Controller
             return redirect()->back()->with('error', 'ログインしてください');
         }
 
-        $form = $request->all();
+        $form = $request->validated();
         $form['user_id'] = auth()->id();
         $form['item_id'] = $item_id;
 
@@ -139,9 +126,7 @@ class ItemController extends Controller
 
         // 画像は名前をつけて保存
         if ($request->hasFile('item_image')){
-            $originalName = $request->file('item_image')->getClientOriginalName();
-            $request->file('item_image')->storeAs('item_images', $originalName, 'public');
-            $form['item_image'] = $originalName;
+            $form['item_image'] = $request->file('item_image')->store('item_images', 'public');
         }
 
         $item = Item::create($form);

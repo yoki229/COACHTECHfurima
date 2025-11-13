@@ -30,7 +30,7 @@
                 <div class="item-card__content">
                     <p class="item-name">{{$item->name}}</p>
                     @if ($item->buyer_id)
-                        <span class="sold">sold</span>
+                        <span class="sold">Sold</span>
                     @endif
                 </div>
             </a>

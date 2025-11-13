@@ -10,7 +10,7 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    // メールアドレスが入力されていない場合、バリデーションエラーが表示される
+    //２ ログイン機能（メールアドレスが入力されていない場合、バリデーションエラーが表示される）
     public function testEmailIsRequired()
     {
         $response = $this->post('/login', [
@@ -21,7 +21,7 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['email']);
     }
 
-    //パスワードが入力されていない場合、バリデーションエラーが表示される
+    //２ ログイン機能（パスワードが入力されていない場合、バリデーションエラーが表示される）
     public function testPasswordIsRequired()
     {
         $response = $this->post('/login', [
@@ -32,7 +32,7 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['password']);
     }
 
-    //入力情報が間違っている場合、バリデーションエラーが表示される
+    //２ ログイン機能（入力情報が間違っている場合、バリデーションエラーが表示される）
     public function testInvalidCredentialsShowError()
     {
         // ダミーユーザーを作成
@@ -51,7 +51,7 @@ class LoginTest extends TestCase
         $this->assertGuest(); // ログインしていないことを確認
     }
 
-    //正しい情報が入力された場合、ログインできる
+    //２ ログイン機能（正しい情報が入力された場合、ログイン処理が実行される）
     public function testValidCredentialsLoginSuccessfully()
     {
         // ダミーユーザー作成
@@ -70,7 +70,7 @@ class LoginTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    //ログアウトできる
+    //３ ログアウト機能（ログアウトできる）
 
     public function testLogoutSuccessfully()
     {

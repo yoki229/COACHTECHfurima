@@ -20,7 +20,7 @@
             <div class="item-detail__name">
                 <h1 class="item-name">{{ $item->name }}</h1>
                 @if ($item->buyer_id)
-                    <span class="sold">sold</span>
+                    <span class="sold">Sold</span>
                 @endif
             </div>
 

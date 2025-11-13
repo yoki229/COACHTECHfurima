@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
             StatusesTableSeeder::class,
         ]);
 
-        // 開発用ダミーデータ local環境でのみ実行
-        if (app()->environment('local')) {
+        // 開発用ダミーデータ local、testing環境でのみ実行
+        if (!app()->environment('production')) {
             $this->call([
                 UsersTableSeeder::class,
                 ItemsTableSeeder::class,

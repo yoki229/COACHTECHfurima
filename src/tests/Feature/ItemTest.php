@@ -18,10 +18,10 @@ class ItemTest extends TestCase
         $this->seed();
     }
 
-    // 全商品を取得できる
+    //４　商品一覧取得（全商品を取得できる）
     public function testAllItemsAreDisplayed()
     {
-        $response = $this->get('/items');
+        $response = $this->get('/');
         $response->assertStatus(200);
 
         foreach (Item::all() as $item) {
@@ -29,23 +29,23 @@ class ItemTest extends TestCase
         }
     }
 
-    // 購入済み商品はSoldと表示される
+    //４　商品一覧取得（購入済み商品はSoldと表示される）
     public function testSoldItemsShowSoldLabel()
     {
         $item = Item::whereNotNull('buyer_id')->first();
 
-        $response = $this->get('/items');
+        $response = $this->get('/');
         $response->assertSee('Sold');
         $response->assertSee($item->name);
     }
 
-    // 自分が出品した商品は表示されない
+    //４　商品一覧取得（自分が出品した商品は表示されない）
     public function testUserDoesNotSeeOwnItems()
     {
         $user = User::find(1);
         $this->actingAs($user);
 
-        $response = $this->get('/items');
+        $response = $this->get('/');
 
         $ownItems = Item::where('user_id', $user->id)->get();
         $otherItems = Item::where('user_id', '!=', $user->id)->get();
@@ -58,7 +58,7 @@ class ItemTest extends TestCase
         }
     }
 
-    // いいねした商品だけがマイリストに表示される
+    //５　マイリスト一覧取得（いいねした商品だけがマイリストに表示される）
     public function testOnlyLikedItemsAreShownInMyList()
     {
         $user = User::find(1);
@@ -67,51 +67,54 @@ class ItemTest extends TestCase
         $likedItem = Item::first();
         Like::insert(['user_id' => $user->id, 'item_id' => $likedItem->id]);
 
-        $response = $this->get('/mylist');
+        $response = $this->actingAs($user)->get('/?tab=mylist');
         $response->assertSee($likedItem->name);
     }
 
-    // 購入済み商品はSoldと表示される(マイリスト)
+    //５　マイリスト一覧取得（購入済み商品はSoldと表示される(マイリスト)）
     public function testSoldItemsMyListShowSoldLabel()
     {
         $item = Item::whereNotNull('buyer_id')->first();
 
-        $response = $this->get('/mylist');
+        $response = $this->get('/?tab=mylist');
         $response->assertSee('Sold');
         $response->assertSee($item->name);
     }
 
-    // 未認証の場合はマイリストに何も表示されない
+    //５　マイリスト一覧取得（未認証の場合はマイリストに何も表示されない）
     public function testMyListIsEmptyForGuest()
     {
-        $response = $this->get('/mylist');
+        $response = $this->get('/?tab=mylist');
         foreach (Item::all() as $item) {
             $response->assertDontSee($item->name);
         }
     }
 
-    // 商品名で部分一致検索ができる
+    //６　商品検索機能（「商品名」で部分一致検索ができる）
     public function testSearchByItemName()
     {
+        $user = User::find(1);
+        $this->actingAs($user);
+        $item = Item::first();
+
         $keyword = '腕時計';
-        $response = $this->get('/items?search=' . $keyword);
+        $response = $this->get('/search?keyword=' . $keyword);
         $response->assertSee($keyword);
     }
 
-    // 検索状態がマイリストでも保持されている
+    //６　商品検索機能（検索状態がマイリストでも保持されている）
     public function testSearchStateIsPreservedInMyList()
     {
         $user = User::find(1);
         $this->actingAs($user);
+        $item = Item::first();
 
         $keyword = '腕時計';
-        $this->get('/items?search=' . $keyword);
-
-        $response = $this->get('/mylist?search=' . $keyword);
+        $response = $this->actingAs($user)->get('/search/?tab=mylist&keyword=' . $keyword);
         $response->assertSee($keyword);
     }
 
-    // 必要な情報が商品詳細ページに表示される
+    //７　商品詳細情報取得（必要な情報が表示される（商品画像、商品名、ブランド名、価格、いいね数、コメント数、商品説明、商品情報（カテゴリ、商品の状態）、コメント数、コメントしたユーザー情報、コメント内容））
     public function testItemDetailDisplaysAllInfo()
     {
         $item = Item::first();
@@ -124,7 +127,7 @@ class ItemTest extends TestCase
                 ->assertSee($item->item_image);
     }
 
-    // 複数カテゴリが表示されるか
+    //７　商品詳細情報取得（複数選択されたカテゴリが表示されているか）
     public function testMultipleCategoriesAreDisplayed()
     {
         $item = Item::first();
@@ -135,7 +138,7 @@ class ItemTest extends TestCase
         }
     }
 
-    // 商品出品画面に必要な情報が保存できる
+    //１５　出品商品情報登録（商品出品画面にて必要な情報が保存できること（カテゴリ、商品の状態、商品名、ブランド名、商品の説明、販売価格））
     public function testUserCanCreateItem()
     {
         $user = User::find(1);

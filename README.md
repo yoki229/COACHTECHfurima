@@ -5,8 +5,8 @@
 ### Docker ビルド
 
 1. `git clone git@github.com:yoki229/COACHTECHfurima.git`
-2. DockerDesktop アプリを立ち上げる
-3. `cd COACHTECHfurima`
+2. `cd COACHTECHfurima`
+3. DockerDesktop アプリを立ち上げる
 4. `docker-compose up -d --build`
 
 > Mac の M1・M2 チップの PC の場合、no matching manifest for linux/arm64/v8 in the manifest list entries のメッセージが表示されビルドができないことがあります。 エラーが発生する場合は、docker-compose.yml ファイルの「mysql」内に「platform」の項目を追加で記載してください
@@ -18,17 +18,16 @@ mysql:
     environment:
 ```
 
-code .
-
 ### Laravel 環境構築
 
-1. `docker-compose exec php bash`
+1. `docker-compose exec php bash`(phpコンテナ名が違う場合は適宜変更)
 2. `composer install`
     `composer require stripe/stripe-php`
-3. `exit`
-4. `cp src/.env.example src/.env`
+    `composer require --dev phpunit/phpunit`
+    `exit`
+3. `cp src/.env.example src/.env`
    (.env.example ファイルから.env を作成)
-5. 環境変数を変更
+4. .envファイルの環境変数を変更
 
 ```
 DB_CONNECTION=mysql
@@ -60,18 +59,54 @@ STRIPE_SECRET_KEY=sk_test_*****
 ```
 docker-compose exec php bash
 php artisan key:generate
+exit
 ```
 
-6. マイグレーションの実行
+6. `cp src/.env src/.env.testing`
+   (.env ファイルから.env.testing を作成)
+7. .env.testingファイルの環境変数を変更
+```
+APP_ENV=testing
+APP_KEY=base64:******
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=test_db
+DB_USERNAME=test_user
+DB_PASSWORD=test_pass
+```
+
+8. MySQLコンテナに入ってテスト用DBを作成
+```
+docker-compose exec mysql mysql -u root -p
+# パスワードは root
+CREATE DATABASE test_db;
+SHOW TABLES;
+EXIT;
+docker-compose exec php php artisan migrate --env=testing
+```
+
+9. マイグレーションの実行
 
 ```
+docker-compose exec php bash
 php artisan migrate
 ```
 
-7. シーディングの実行
+10. シーディングの実行
 
 ```
 php artisan db:seed
+```
+
+11. シンボリックリンクの作成
+
+```
+php artisan storage:link
+exit
 ```
 
 ## 使用技術

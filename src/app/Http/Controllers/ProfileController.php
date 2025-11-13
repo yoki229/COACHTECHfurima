@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Models\User;
 use App\Models\Item;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\AddressRequest;
@@ -44,10 +43,13 @@ class ProfileController extends Controller
         $user = auth()->user();
 
         // 画像を保存
-        if (!$request->hasFile('profile_image')) return redirect('/mypage');
+        if (!$request->hasFile('profile_image')){
+            return redirect('/mypage');
+        }
 
         $image = $request->file('profile_image');
-        $name = $image->getClientOriginalName();
+        $path = $image->store('profile_images', 'public');
+        $name = basename($path);
 
         //本番環境では古い画像はstorageから削除する
         if(app()->isProduction() && $user->profile_image){

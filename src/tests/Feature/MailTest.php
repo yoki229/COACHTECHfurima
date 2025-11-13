@@ -5,34 +5,32 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Auth\Notifications\VerifyEmail;
+use App\Notifications\CustomVerifyEmail;
 use Illuminate\Support\Facades\URL;
 use App\Models\User;
 
 class MailTest extends TestCase
 {
-    use RefreshDatabase; // テストごとにDBをリセット
+    use RefreshDatabase;
 
-    //会員登録後、認証メールが送信される
+    //１６　メール認証機能（会員登録後、認証メールが送信される）
     public function testRegistrationSendsVerificationEmail()
     {
         Notification::fake();
 
         $response = $this->post('/register', [
-            'name' => '山田太郎',
-            'email' => 'yamada@example.com',
+            'name' => '藤谷次郎',
+            'email' => 'hujitani@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',
         ]);
 
-        $user = User::where('email', 'yamada@example.com')->first();
-
-        $this->assertDatabaseHas('users', ['email' => 'yamada@example.com']);
-
-        Notification::assertSentTo($user, VerifyEmail::class);
+        $user = User::where('email', 'hujitani@example.com')->first();
+        $this->assertDatabaseHas('users', ['email' => 'hujitani@example.com']);
+        Notification::assertSentTo($user, CustomVerifyEmail::class);
     }
 
-    //メール認証誘導画面で「認証はこちらから」ボタンを押下するとメール認証サイトに遷移する
+    //１６　メール認証機能（メール未認証の場合、メール認証導線画面を再表示する（コーチ改））
     public function testEmailCheckRedirectsToVerificationPageIfNotVerified()
     {
         $user = User::factory()->create([
@@ -40,14 +38,12 @@ class MailTest extends TestCase
         ]);
 
         $this->actingAs($user);
-
         $response = $this->get('/email/check');
-
         $response->assertRedirect('/email');
     }
 
 
-    //メール認証サイトのメール認証を完了すると、プロフィール設定画面に遷移する
+    //１６　メール認証機能（メール認証サイトのメール認証を完了すると、プロフィール設定画面に遷移する）
     public function testEmailVerificationCompletesAndRedirects()
     {
         Notification::fake();
@@ -59,7 +55,7 @@ class MailTest extends TestCase
         // 通知を明示的に送る
         $user->sendEmailVerificationNotification();
 
-        Notification::assertSentTo($user, VerifyEmail::class);
+        Notification::assertSentTo($user, CustomVerifyEmail::class);
 
         // EmailVerificationRequestをシミュレート
         $verificationUrl = URL::temporarySignedRoute(

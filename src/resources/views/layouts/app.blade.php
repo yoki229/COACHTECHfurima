@@ -15,7 +15,7 @@
 
         <!-- ヘッダー -->
         <header class="header">
-            @if (Auth::check())
+            @if (Auth::check() && Auth::user()->hasVerifiedEmail())
             <div class="header-nav__logo">
                 <a class="header-nav__logo-link" href="/">
                     <img src="{{ asset('images/logo.svg') }}" alt="COACHTECH" class="header__img">

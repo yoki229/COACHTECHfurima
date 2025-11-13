@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -28,10 +27,8 @@ class MailController extends Controller
         if ($user->hasVerifiedEmail()) {
             return redirect('mypage_profile');
         }
-        else {
-            return redirect('/email')
-            ->with('message', 'メール認証を完了してください。');
-        }
+        return redirect('/email')
+        ->with('message', 'メール認証を完了してください。');
     }
 
     // メール再送信処理
