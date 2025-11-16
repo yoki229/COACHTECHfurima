@@ -24,7 +24,7 @@ class ItemController extends Controller
             if(! $user || ! $user->hasVerifiedEmail()){
                 $items = collect();
             } else {
-                $items = $user->likes()
+                $items = $user->likedItems()
                 ->search($keyword)
                 ->get();
             }
@@ -40,7 +40,7 @@ class ItemController extends Controller
             ->get();
         }
 
-        $activeTab = '$tab';
+        $activeTab = $tab;
 
         return view('index', compact('items', 'activeTab', 'keyword'));
     }

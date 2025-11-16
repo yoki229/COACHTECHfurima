@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\Like;
+use App\Models\Comment;
 
 class ItemTest extends TestCase
 {
@@ -35,7 +36,7 @@ class ItemTest extends TestCase
         $item = Item::whereNotNull('buyer_id')->first();
 
         $response = $this->get('/');
-        $response->assertSee('Sold');
+        $response->assertSee('sold');
         $response->assertSee($item->name);
     }
 
@@ -74,10 +75,18 @@ class ItemTest extends TestCase
     //５　マイリスト一覧取得（購入済み商品はSoldと表示される(マイリスト)）
     public function testSoldItemsMyListShowSoldLabel()
     {
+        $user = User::find(1);
+        $this->actingAs($user);
+
         $item = Item::whereNotNull('buyer_id')->first();
 
+        Like::firstOrCreate([
+            'user_id' => $user->id,
+            'item_id' => $item->id,
+        ]);
+
         $response = $this->get('/?tab=mylist');
-        $response->assertSee('Sold');
+        $response->assertSee('sold');
         $response->assertSee($item->name);
     }
 
@@ -118,13 +127,31 @@ class ItemTest extends TestCase
     public function testItemDetailDisplaysAllInfo()
     {
         $item = Item::first();
-        $response = $this->get('/items/' . $item->id);
+        $likeCount = $item->likedUsers()->count();
+        $commentCount = $item->comments()->count();
+        $category = $item->categories()->first();
 
-        $response->assertSee($item->name)
-                ->assertSee($item->description)
+        // テスト用のコメントを作成
+        $comment = Comment::create([
+            'item_id' => $item->id,
+            'user_id' => User::first()->id,
+            'comment' => 'テスト用コメント',
+        ]); 
+
+        $response = $this->get('/item/' . $item->id);
+
+        $response->assertSee(asset($item->item_image))
+                ->assertSee($item->name)
                 ->assertSee($item->brand ?? '')
                 ->assertSee($item->price)
-                ->assertSee($item->item_image);
+                ->assertSee($likeCount)
+                ->assertSee($commentCount)
+                ->assertSee($item->description)
+                ->assertSee($category->name)
+                ->assertSee($item->status->name)
+                ->assertSee($commentCount)
+                ->assertSee($comment->user->name)
+                ->assertSee($comment->comment);
     }
 
     //７　商品詳細情報取得（複数選択されたカテゴリが表示されているか）

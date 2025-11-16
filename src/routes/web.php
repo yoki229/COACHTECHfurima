@@ -14,7 +14,9 @@ Route::get('/', [ItemController::class, 'index']);
 //商品詳細画面の表示
 Route::get('/item/{item_id}', [ItemController::class, 'getItem']);
 //コメント投稿機能
-    Route::post('/item/{item_id}/comments_store', [ItemController::class, 'commentsStore']);
+Route::post('/item/{item_id}/comments_store', [ItemController::class, 'commentsStore']);
+//検索処理
+Route::get('/search', [ItemController::class, 'search']);
 
 //ログイン済み用のルーティング
 Route::middleware('auth', 'verified')->group(function () {
@@ -31,8 +33,6 @@ Route::middleware('auth', 'verified')->group(function () {
 
     //いいね機能
     Route::post('/item/{item_id}/like', [ItemController::class, 'like']);
-    //検索処理
-    Route::get('/search', [ItemController::class, 'search']);
     //出品画面の表示
     Route::get('/sell', [ItemController::class, 'sell']);
     //出品処理

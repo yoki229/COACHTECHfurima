@@ -73,6 +73,7 @@
 }
 
 .list__logout,
+.list__login,
 .list__mypage {
     color: #FFF;
     text-decoration: none;
@@ -124,6 +125,7 @@
     }
 
     .list__logout,
+    .list__login,
     .list__mypage {
         padding: 5px;
         margin-right: 5px;
@@ -162,6 +164,7 @@
     }
 
     .list__logout,
+    .list__login,
     .list__mypage {
         padding: 5px;
         margin-right: 3px;

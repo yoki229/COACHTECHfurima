@@ -9,20 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
+
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        if (Auth::check()) {
+        $guards = empty($guards) ? [null] : $guards;
 
-            // ログイン済み & 未認証 → /login へ
-            if (! Auth::user()->hasVerifiedEmail()) {
-                return $next($request);
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                return redirect(RouteServiceProvider::HOME);
             }
-
-            // ログイン済み & 認証済み → /index へ
-            return redirect(RouteServiceProvider::HOME);
         }
 
-    // 未ログインは普通に /login にアクセス可能
-    return $next($request);
+        return $next($request);
     }
 }

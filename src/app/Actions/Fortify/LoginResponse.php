@@ -16,7 +16,7 @@ class LoginResponse implements LoginResponseContract
             return redirect('/email');
         }
 
-        // 認証済みユーザーは intended ページまたは home
+        // 認証済みユーザーはhome
         return redirect('/');
     }
 }
