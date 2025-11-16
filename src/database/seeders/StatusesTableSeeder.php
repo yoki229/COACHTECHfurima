@@ -15,5 +15,13 @@ class StatusesTableSeeder extends Seeder
         3 => 'やや傷や汚れあり',
         4 => '状態が悪い',
         ];
+
+        // シーディングするたびに重複作成されない為、なければ作るの設定
+       foreach ($statusData as $id => $name) {
+            Status::updateOrCreate(
+                ['id' => $id],
+                ['name' => $name]
+            );
+        }
     }
 }
