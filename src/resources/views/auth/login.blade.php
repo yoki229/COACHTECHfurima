@@ -6,15 +6,15 @@
 
 @section('content')
 <div class="login-form">
-    <h2 class="login-form__heading content__heading">ログイン</h2>
+    <h1 class="login-form__heading content__heading">ログイン</h1>
     <div class="login-form__inner">
-        <form class="login-form__form" action="/login" method="post">
+        <form class="login-form__form" action="/login" method="post" novalidate>
         @csrf
 
             {{-- メールアドレス --}}
             <div class="login-form__group">
                 <label class="login-form__label" for="email">メールアドレス</label>
-                <input class="login-form__input" type="email" name="email" id="email" value="{{ old('email') }}">
+                <input class="login-form__input" type="text" name="email" id="email" value="{{ old('email') }}">
                 @error('email')
                 <p class="error-message">{{ $message }}</p>
                 @enderror

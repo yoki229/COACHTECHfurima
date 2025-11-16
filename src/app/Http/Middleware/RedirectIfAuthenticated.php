@@ -9,24 +9,20 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @param  string|null  ...$guards
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-     */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $guards = empty($guards) ? [null] : $guards;
+        if (Auth::check()) {
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+            // ログイン済み & 未認証 → /login へ
+            if (! Auth::user()->hasVerifiedEmail()) {
+                return $next($request);
             }
+
+            // ログイン済み & 認証済み → /index へ
+            return redirect(RouteServiceProvider::HOME);
         }
 
-        return $next($request);
+    // 未ログインは普通に /login にアクセス可能
+    return $next($request);
     }
 }

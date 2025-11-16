@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Actions\Fortify\LoginResponse;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -13,6 +14,7 @@ use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use Laravel\Fortify\Http\Requests\RegisterRequest as FortifyRegisterRequest;
 use Laravel\Fortify\Contracts\RegisterResponse;
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -52,5 +54,8 @@ class FortifyServiceProvider extends ServiceProvider
                 }
             };
         });
+
+        // LoginResponse をカスタムに置き換え
+        $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
     }
 }

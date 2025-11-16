@@ -61,9 +61,19 @@
     text-decoration: none;
 }
 
+.item-card__wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    overflow: hidden;
+    border-radius: 8px;
+}
+
 .item-card__img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .sold-item .item-card__img {

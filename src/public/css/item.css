@@ -61,7 +61,8 @@
 
 /* ブランド名 */
 .item-brand {
-    margin-top: 5px;
+    display: inline-block;
+    margin-top: 8px;
     font-size: 15px;
 }
 

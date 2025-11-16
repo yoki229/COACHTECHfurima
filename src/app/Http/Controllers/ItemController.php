@@ -19,11 +19,15 @@ class ItemController extends Controller
         $keyword = $request->input('keyword', '');
         $tab = $request->input('tab', 'recommend');
 
-        if($tab === 'mylist' && $user) {
-            //マイリスト表示
-            $items = $user->likes()
-            ->search($keyword)
-            ->get();
+        //マイリスト表示
+        if($tab === 'mylist') {
+            if(! $user || ! $user->hasVerifiedEmail()){
+                $items = collect();
+            } else {
+                $items = $user->likes()
+                ->search($keyword)
+                ->get();
+            }
         } else {
             //おすすめ表示
             $items = Item::select('id', 'item_image', 'name', 'user_id', 'buyer_id')

@@ -26,8 +26,9 @@
 
             {{-- ブランド名 --}}
             <div class="item-detail__brand">
-                @if($item->brand_name)
-                    <p class="item-brand">ブランド：{{ $item->brand_name }}</p>
+                <span class="item-brand">ブランド：</span>
+                @if($item->brand)
+                    <span class="item-brand">{{ $item->brand }}</span>
                 @endif
             </div>
 
