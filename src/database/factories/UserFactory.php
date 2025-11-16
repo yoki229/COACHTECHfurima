@@ -21,14 +21,23 @@ class UserFactory extends Factory
             'address' => $this->faker->city() . $this->faker->streetAddress(),
             'building' => $this->faker->secondaryAddress,
             'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
         ];
     }
 
-    //テスト用。「未認証状態」を再現
+    // テスト用。「未認証状態」を再現
     public function unverified()
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn () => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    // 「認証状態」を再現
+    public function verified()
+    {
+        return $this->state(fn () => [
+            'email_verified_at' => now(),
         ]);
     }
 }

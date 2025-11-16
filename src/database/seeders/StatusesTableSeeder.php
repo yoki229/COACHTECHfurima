@@ -15,12 +15,5 @@ class StatusesTableSeeder extends Seeder
         3 => 'やや傷や汚れあり',
         4 => '状態が悪い',
         ];
-
-       foreach ($statusData as $id => $name) {
-            Status::updateOrCreate(
-                ['id' => $id],    // ID を固定
-                ['name' => $name]
-            );
-        }
     }
 }

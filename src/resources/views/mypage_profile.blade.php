@@ -20,7 +20,7 @@
                     <input class="profile-form__file-input" type="file" name="profile_image" id="image"  accept="image/*">
                     <label class="profile-form__file-label" for="image">画像を選択する</label>
                 </div>
-                @error('profile_imag')
+                @error('profile_image')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
             </div>

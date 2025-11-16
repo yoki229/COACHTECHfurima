@@ -6,10 +6,6 @@
 
 @section('content')
 <div class="register-form">
-    @if (session('message'))
-            <p class="send-message">{{ session('message') }}</p>
-    @endif
-
     <h2 class="register-form__heading content__heading">会員登録</h2>
     <div class="register-form__inner">
         <form class="register-form__form" action="/register" method="post">
@@ -27,7 +23,7 @@
             {{-- メールアドレス --}}
             <div class="register-form__group">
                 <label class="register-form__label" for="email">メールアドレス</label>
-                <input class="register-form__input" type="mail" name="email" id="email" value="{{ old('email') }}">
+                <input class="register-form__input" type="email" name="email" id="email" value="{{ old('email') }}">
                 @error('email')
                 <p class="error-message">{{ $message }}</p>
                 @enderror
@@ -60,4 +56,4 @@
         <a class="login__link" href="/login">ログインはこちら</a>
     </div>
 </div>
-@endsection('content')
+@endsection

@@ -12,7 +12,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('buyer_id')->nullable()->constrained('users');
+            $table->foreignId('buyer_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('name', 255);
             $table->string('item_image', 255);
             $table->text('description');
@@ -27,6 +27,7 @@ class CreateItemsTable extends Migration
     {
         Schema::table('items', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
+            $table->dropForeign(['buyer_id']);
             $table->dropForeign(['status_id']);
         });
         Schema::dropIfExists('items');

@@ -45,9 +45,8 @@ class ItemsTableSeeder extends Seeder
             ],
             [
             'user_id' => 4,
-            'buyer_id' => 1,
             'name' => '革靴',
-            'buyer_id'=> 3,
+            'buyer_id' => 1,
             'price' => 4000,
             'item_image' => 'Shoes.jpg',
             'description' => 'クラシックなデザインの革靴',
@@ -118,7 +117,7 @@ class ItemsTableSeeder extends Seeder
             ],
         ];
 
-        // データを挿入
+        // 中間テーブルを使った関係のカテゴリーのデータを挿入
         foreach ($items as $item) {
             $categories = $item['category'];
             unset($item['category']);
