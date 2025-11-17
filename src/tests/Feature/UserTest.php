@@ -13,11 +13,7 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-    }
+    protected $seed = true;
 
     // 8　いいね機能（いいねアイコンを押下することによって、いいねした商品として登録することができる。）
     public function testUserCanLikeItem()

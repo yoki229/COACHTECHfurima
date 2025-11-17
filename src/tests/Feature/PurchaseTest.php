@@ -12,11 +12,7 @@ class PurchaseTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-    }
+    protected $seed = true;
 
     //１０　商品購入機能（「購入する」ボタンを押下すると購入が完了する）
     public function testUserCanPurchaseItem()

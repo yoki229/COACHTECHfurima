@@ -24,7 +24,7 @@ class ItemController extends Controller
             if(! $user || ! $user->hasVerifiedEmail()){
                 $items = collect();
             } else {
-                $items = $user->likedItems()
+                $items = $user->likes()
                 ->search($keyword)
                 ->get();
             }

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\Like;
@@ -13,11 +14,7 @@ class ItemTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-    }
+    protected $seed = true;
 
     //４　商品一覧取得（全商品を取得できる）
     public function testAllItemsAreDisplayed()
@@ -158,7 +155,7 @@ class ItemTest extends TestCase
     public function testMultipleCategoriesAreDisplayed()
     {
         $item = Item::first();
-        $response = $this->get('/items/' . $item->id);
+        $response = $this->get('/item/' . $item->id);
 
         foreach ($item->categories as $category) {
             $response->assertSee($category->name);
@@ -169,18 +166,28 @@ class ItemTest extends TestCase
     public function testUserCanCreateItem()
     {
         $user = User::find(1);
-        $response = $this->actingAs($user)
-            ->post('/items', [
+        $this->actingAs($user);
+
+        $file = new UploadedFile(
+            storage_path('app/public/item_images/bag.jpg'),
+            'test.png',
+            'image/png',
+            null,
+            true
+        );
+
+        $response = $this->post('/sell', [
+                'item_image' => $file,
+                'category' => [1, 3],
+                'status' => 1,
                 'name' => '新商品',
-                'price' => 1000,
                 'brand' => 'ブランドA',
                 'description' => '商品の説明',
-                'status_id' => 1,
-                'category' => [1, 3],
-                'item_image' => 'sample.jpg',
+                'price' => 1000,
             ]);
 
-        $response->assertRedirect('/items');
+        $response->assertRedirect('/mypage');
+        
         $this->assertDatabaseHas('items', [
             'name' => '新商品',
             'user_id' => $user->id,
