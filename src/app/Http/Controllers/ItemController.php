@@ -98,11 +98,6 @@ class ItemController extends Controller
 
     // コメント機能
     public function commentsStore(CommentRequest $request, $item_id){
-        if(!auth()->check()){
-            // ログインしていなければメッセージを返す
-            return redirect()->back()->with('error', 'ログインしてください');
-        }
-
         $form = $request->validated();
         $form['user_id'] = auth()->id();
         $form['item_id'] = $item_id;

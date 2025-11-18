@@ -151,12 +151,6 @@
                         <form action="/item/{{ $item->id }}/comments_store" method="post" class="item-comment__form">
                             @csrf
                             <textarea name="comment" rows="10" class="comment-form__textarea">{{ old('comment') }}</textarea>
-
-                            {{-- ログインしていないユーザーにエラーメッセージ --}}
-                            @if(session('error'))
-                                <p class="error-message__login">{{ session('error') }}</p>
-                            @endif
-
                             <button class="comment-form__button">コメントを送信する</button>
                         </form>
                 </div>
